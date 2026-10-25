@@ -3,6 +3,9 @@ layout: ../layouts/AboutLayout.astro
 title: "Sharing the night sky of Kerry"
 eyebrow: "About us"
 intro: "Night Sky Guides Ireland is a network of trained local guides who love the dark skies of Kerry — and love sharing them even more."
+guidesEyebrow: "Who we are"
+guidesTitle: "The guides behind the stars"
+guidesButton: "Meet all {count} guides"
 description: "About Night Sky Guides Ireland — a network of trained local guides in the Kerry International Dark Sky Reserve."
 ---
 

@@ -12,41 +12,23 @@ import GuideCard from "@components/GuideCard.astro";
 import GuideMap from "@components/GuideMap.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { CONTACT } from "@config";
+import { withBaseHtml } from "@utils/withBase";
+import home from "../data/home.json";
 
 const posts = getSortedPosts(await getCollection("blog")).slice(0, 3);
 const guides = (await getCollection("guides")).sort(
   (a, b) => a.data.order - b.data.order
 );
 
-const experiences = [
-  {
-    title: "Stars & constellations",
-    text: "Learn to find your way around the sky — from the Plough to Orion — with the naked eye.",
-    icon: "M12 2l2.4 6.9H22l-6 4.6 2.3 7.1L12 16.2 5.7 20.6 8 13.5 2 8.9h7.6z",
-  },
-  {
-    title: "Planets & the Moon",
-    text: "Spot the planets wandering among the stars and see craters and rings through a telescope.",
-    icon: "M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-10 9c4 3 16 3 20-2",
-  },
-  {
-    title: "The Milky Way",
-    text: "On a clear, moonless night our galaxy arches across the sky from horizon to horizon.",
-    icon: "M3 18C8 14 10 6 21 5M5 20c5-2 9-8 16-9",
-  },
-  {
-    title: "Myths & stories",
-    text: "Hear the legends, folklore and science behind the sky our ancestors watched for millennia.",
-    icon: "M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zm16 0h-4a3 3 0 0 0-3 3",
-  },
-];
-
-const facts = [
-  { value: "Gold", label: "Tier dark sky quality" },
-  { value: "2014", label: "Designated by DarkSky International" },
-  { value: "~700 km²", label: "of protected night sky" },
-  { value: "1000s", label: "of stars visible on a clear night" },
-];
+// All texts are edited in Pages CMS → "Home page" (src/data/home.json)
+const ICONS: Record<string, string> = {
+  star: "M12 2l2.4 6.9H22l-6 4.6 2.3 7.1L12 16.2 5.7 20.6 8 13.5 2 8.9h7.6z",
+  planet: "M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm-10 9c4 3 16 3 20-2",
+  milkyway: "M3 18C8 14 10 6 21 5M5 20c5-2 9-8 16-9",
+  book: "M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4zm16 0h-4a3 3 0 0 0-3 3",
+};
+const { hero, intro, experiences, reserve, steps, news, cta } = home;
+const guidesText = home.guides;
 ---
 
 <Layout>
@@ -57,16 +39,13 @@ const facts = [
       <Starfield />
       <div class="container-wide hero-content">
         <Logo class="hero-logo" />
-        <p class="eyebrow">Night Sky Guides Ireland</p>
-        <h1>Discover the Wonders of the&nbsp;Night&nbsp;Sky</h1>
-        <p class="hero-sub">
-          Guided stargazing with local experts in the Gold Tier Kerry
-          International Dark Sky Reserve.
-        </p>
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1>{hero.title}</h1>
+        <p class="hero-sub">{hero.subtitle}</p>
         <div class="hero-ctas">
-          <a href="#guides" class="btn-primary">Find your guide</a>
+          <a href="#guides" class="btn-primary">{hero.primaryButton}</a>
           <a href={withBase("/dark-sky-reserve/")} class="btn-ghost"
-            >Explore the reserve</a
+            >{hero.secondaryButton}</a
           >
         </div>
       </div>
@@ -80,19 +59,10 @@ const facts = [
     <section id="intro" class="section intro">
       <div class="container-wide intro-grid">
         <div>
-          <p class="eyebrow">Look up</p>
-          <h2 class="section-title">
-            Your journey through the cosmos starts here
-          </h2>
+          <p class="eyebrow">{intro.eyebrow}</p>
+          <h2 class="section-title">{intro.title}</h2>
         </div>
-        <p class="lead">
-          Look up and explore the wonders of the universe with your personal
-          Night Sky Guide. Discover stars, constellations, planets, and
-          celestial events while learning the secrets and stories behind the
-          beauty of the night sky. Whether you're a curious beginner or a
-          passionate stargazer, your journey through the cosmos starts here with
-          us.
-        </p>
+        <p class="lead">{intro.text}</p>
       </div>
 
       <ul class="container-wide experiences">
@@ -100,7 +70,7 @@ const facts = [
           experiences.map(item => (
             <li class="card-glass">
               <svg viewBox="0 0 24 24" class="exp-icon" aria-hidden="true">
-                <path d={item.icon} />
+                <path d={ICONS[item.icon] ?? ICONS.star} />
               </svg>
               <div>
                 <h3>{item.title}</h3>
@@ -116,15 +86,14 @@ const facts = [
     <section id="guides" class="section guides">
       <div class="container-wide section-head">
         <div>
-          <p class="eyebrow">Who we are</p>
-          <h2 class="section-title">Meet your Night Sky Guides</h2>
+          <p class="eyebrow">{guidesText.eyebrow}</p>
+          <h2 class="section-title">{guidesText.title}</h2>
           <p class="section-intro">
-            {guides.length} trained local guides across Kerry — pick the one nearest
-            to you or the one who speaks your language.
+            {guidesText.intro.replace("{count}", String(guides.length))}
           </p>
         </div>
         <a href={withBase("/guides/")} class="btn-ghost hidden sm:inline-flex"
-          >All guides</a
+          >{guidesText.button}</a
         >
       </div>
 
@@ -140,12 +109,12 @@ const facts = [
 
       <div class="container-wide mt-6 sm:hidden">
         <a href={withBase("/guides/")} class="btn-ghost w-full"
-          >See all guides</a
+          >{guidesText.button}</a
         >
       </div>
 
       <div class="container-wide mt-14">
-        <h3 class="map-title">Where our guides are</h3>
+        <h3 class="map-title">{guidesText.mapTitle}</h3>
         <GuideMap guides={guides} />
       </div>
     </section>
@@ -155,27 +124,19 @@ const facts = [
       <Starfield density={0.6} milkyWay={false} />
       <div class="container-wide reserve-grid">
         <div>
-          <p class="eyebrow">Wild Atlantic Way</p>
-          <h2 class="section-title">Kerry International Dark Sky Reserve</h2>
-          <p class="mt-6 leading-relaxed text-white/80">
-            Located along Ireland’s stunning Wild Atlantic Way, the Kerry
-            International Dark Sky Reserve is the only Gold Tier dark sky
-            reserve in the Northern Hemisphere and offers some of the darkest
-            and most spectacular night skies in the world.
-          </p>
-          <p class="mt-4 leading-relaxed text-white/80">
-            Far from the glow of city lights, visitors can admire countless
-            stars, spot constellations, and experience the Milky Way stretching
-            across the sky. It’s a magical destination for stargazers, nature
-            lovers, and anyone wishing to discover the wonders of the universe.
-          </p>
+          <p class="eyebrow">{reserve.eyebrow}</p>
+          <h2 class="section-title">{reserve.title}</h2>
+          <div
+            class="rich mt-6 leading-relaxed text-white/80"
+            set:html={withBaseHtml(reserve.body)}
+          />
           <a href={withBase("/dark-sky-reserve/")} class="btn-primary mt-8">
-            About the reserve
+            {reserve.button}
           </a>
         </div>
         <dl class="facts">
           {
-            facts.map(fact => (
+            reserve.facts.map(fact => (
               <div class="card-glass">
                 <dt>{fact.label}</dt>
                 <dd>{fact.value}</dd>
@@ -189,30 +150,18 @@ const facts = [
     <!-- How it works -->
     <section class="section steps-section">
       <div class="container-wide">
-        <p class="eyebrow">Your night out</p>
-        <h2 class="section-title">Three steps to the stars</h2>
+        <p class="eyebrow">{steps.eyebrow}</p>
+        <h2 class="section-title">{steps.title}</h2>
         <ol class="steps">
-          <li>
-            <span>01</span>
-            <h3>Choose a guide</h3>
-            <p>Browse our guides by location and language.</p>
-          </li>
-          <li>
-            <span>02</span>
-            <h3>Get in touch</h3>
-            <p>
-              Contact your guide directly to plan the date, group and meeting
-              point.
-            </p>
-          </li>
-          <li>
-            <span>03</span>
-            <h3>Look up</h3>
-            <p>
-              Dress warm, bring curiosity — your guide brings the stories and
-              the stars.
-            </p>
-          </li>
+          {
+            steps.items.map((step, i) => (
+              <li>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </li>
+            ))
+          }
         </ol>
       </div>
     </section>
@@ -223,14 +172,14 @@ const facts = [
         <section class="section news">
           <div class="container-wide section-head">
             <div>
-              <p class="eyebrow">News</p>
-              <h2 class="section-title">Latest from the dark side</h2>
+              <p class="eyebrow">{news.eyebrow}</p>
+              <h2 class="section-title">{news.title}</h2>
             </div>
             <a
               href={withBase("/posts/")}
               class="btn-ghost hidden sm:inline-flex"
             >
-              All news
+              {news.button}
             </a>
           </div>
           <ul class="container-wide news-grid">
@@ -244,7 +193,7 @@ const facts = [
           </ul>
           <div class="container-wide mt-6 sm:hidden">
             <a href={withBase("/posts/")} class="btn-ghost w-full">
-              All news
+              {news.button}
             </a>
           </div>
         </section>
@@ -256,17 +205,17 @@ const facts = [
       <div class="container-wide">
         <div class="cta card-glass">
           <div>
-            <p class="eyebrow">Become a member</p>
-            <h2>Are you a Night Sky Guide?</h2>
-            <p>
-              Join our network of trained guides and help visitors discover the
-              night sky above Kerry.
-            </p>
+            <p class="eyebrow">{cta.eyebrow}</p>
+            <h2>{cta.title}</h2>
+            <p>{cta.text}</p>
           </div>
           <div class="cta-actions">
-            <a href={withBase("/membership/")} class="btn-primary">Membership</a
+            <a href={withBase("/membership/")} class="btn-primary"
+              >{cta.primaryButton}</a
             >
-            <a href={`mailto:${CONTACT.email}`} class="btn-ghost">Email us</a>
+            <a href={`mailto:${CONTACT.email}`} class="btn-ghost"
+              >{cta.secondaryButton}</a
+            >
           </div>
         </div>
       </div>
@@ -277,6 +226,9 @@ const facts = [
 </Layout>
 
 <style>
+  .rich :global(p + p) {
+    @apply mt-4;
+  }
   .section {
     @apply relative py-16 sm:py-28;
   }

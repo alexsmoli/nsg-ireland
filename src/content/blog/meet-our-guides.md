@@ -9,4 +9,4 @@ description: Our guides have completed their Night Sky Guide training and are re
 
 We are proud to introduce our first group of trained Night Sky Guides, based all around the Iveragh Peninsula.
 
-Each guide brings their own background, languages and favourite stories of the sky. Visit the [guides page](../../guides/) to find the one that suits you best.
+Each guide brings their own background, languages and favourite stories of the sky. Visit the [guides page](/guides/) to find the one that suits you best.

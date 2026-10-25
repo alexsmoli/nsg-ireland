@@ -6,15 +6,19 @@ import Footer from "@components/Footer.astro";
 import PageHero from "@components/PageHero.astro";
 import Socials from "@components/Socials.astro";
 import { CONTACT, SITE } from "@config";
+import page from "../data/contact.json";
 ---
 
-<Layout title={`Contact | ${SITE.title}`}>
+<Layout
+  title={`Contact | ${SITE.title}`}
+  description={page.seoDescription || undefined}
+>
   <Header activeNav="contact" transparent />
   <main id="main-content">
     <PageHero
-      eyebrow="Contact"
-      title="Let’s look up together"
-      intro="Questions about a night out, the dark sky reserve or becoming a guide? We'd love to hear from you."
+      eyebrow={page.hero.eyebrow}
+      title={page.hero.title}
+      intro={page.hero.intro}
     />
 
     <section
@@ -38,14 +42,14 @@ import { CONTACT, SITE } from "@config";
           <span class="value">{CONTACT.region}</span>
         </div>
         <a href={withBase("/guides/")} class="contact-tile card-glass">
-          <span class="label">Book a night out</span>
-          <span class="value">Contact a guide directly →</span>
+          <span class="label">{page.bookingTile.label}</span>
+          <span class="value">{page.bookingTile.value}</span>
         </a>
         <Socials />
       </div>
 
       <form class="card-glass contact-form" id="contact-form">
-        <h2 class="text-2xl font-bold text-white">Send us a message</h2>
+        <h2 class="text-2xl font-bold text-white">{page.form.title}</h2>
         <label>
           <span>Name</span>
           <input name="name" required autocomplete="name" />
@@ -53,10 +57,7 @@ import { CONTACT, SITE } from "@config";
         <label>
           <span>Subject</span>
           <select name="subject">
-            <option>Stargazing with a guide</option>
-            <option>Kerry Dark Sky Reserve</option>
-            <option>Membership</option>
-            <option>Something else</option>
+            {page.form.subjects.map(subject => <option>{subject}</option>)}
           </select>
         </label>
         <label>
@@ -64,11 +65,9 @@ import { CONTACT, SITE } from "@config";
           <textarea name="message" rows="5" required></textarea>
         </label>
         <button type="submit" class="btn-primary w-full sm:w-fit">
-          Open in email app
+          {page.form.button}
         </button>
-        <p class="text-xs text-white/50">
-          This opens your email app with the message ready to send.
-        </p>
+        <p class="text-xs text-white/50">{page.form.note}</p>
       </form>
     </section>
   </main>

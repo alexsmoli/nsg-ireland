@@ -1,0 +1,14 @@
+{
+  "seoDescription": "Meet the trained Night Sky Guides of Kerry — find a guide near you or one who speaks your language.",
+  "hero": {
+    "eyebrow": "Who we are",
+    "title": "Meet our Night Sky Guides",
+    "intro": "Local people with a passion for the night sky, trained to share the stars, planets and stories above Kerry. Find a guide near you — or one who speaks your language."
+  },
+  "map": {
+    "title": "Where our guides are",
+    "hint": "Tap a star to see who guides there."
+  },
+  "filterLabel": "Language",
+  "filterAll": "All"
+}

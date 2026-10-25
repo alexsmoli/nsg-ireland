@@ -4,6 +4,7 @@ import { SITE } from "@config";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import settings from "../data/settings.json";
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
@@ -12,8 +13,10 @@ import Footer from "@components/Footer.astro";
   <main id="main-content">
     <div class="not-found-wrapper">
       <h1 aria-label="404 Not Found">404</h1>
-      <p>Lost in space — this page drifted out of orbit.</p>
-      <a href={withBase("/")} class="btn-primary mt-8">Back to Earth</a>
+      <p>{settings.notFound.text}</p>
+      <a href={withBase("/")} class="btn-primary mt-8"
+        >{settings.notFound.button}</a
+      >
     </div>
   </main>
 

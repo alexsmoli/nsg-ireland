@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "eyebrow": "Night Sky Guides Ireland",
+    "title": "Discover the Wonders of the Night Sky",
+    "subtitle": "Guided stargazing with local experts in the Gold Tier Kerry International Dark Sky Reserve.",
+    "primaryButton": "Find your guide",
+    "secondaryButton": "Explore the reserve"
+  },
+  "intro": {
+    "eyebrow": "Look up",
+    "title": "Your journey through the cosmos starts here",
+    "text": "Look up and explore the wonders of the universe with your personal Night Sky Guide. Discover stars, constellations, planets, and celestial events while learning the secrets and stories behind the beauty of the night sky. Whether you're a curious beginner or a passionate stargazer, your journey through the cosmos starts here with us."
+  },
+  "experiences": [
+    {
+      "icon": "star",
+      "title": "Stars & constellations",
+      "text": "Learn to find your way around the sky — from the Plough to Orion — with the naked eye."
+    },
+    {
+      "icon": "planet",
+      "title": "Planets & the Moon",
+      "text": "Spot the planets wandering among the stars and see craters and rings through a telescope."
+    },
+    {
+      "icon": "milkyway",
+      "title": "The Milky Way",
+      "text": "On a clear, moonless night our galaxy arches across the sky from horizon to horizon."
+    },
+    {
+      "icon": "book",
+      "title": "Myths & stories",
+      "text": "Hear the legends, folklore and science behind the sky our ancestors watched for millennia."
+    }
+  ],
+  "guides": {
+    "eyebrow": "Who we are",
+    "title": "Meet your Night Sky Guides",
+    "intro": "{count} trained local guides across Kerry — pick the one nearest to you or the one who speaks your language.",
+    "button": "All guides",
+    "mapTitle": "Where our guides are"
+  },
+  "reserve": {
+    "eyebrow": "Wild Atlantic Way",
+    "title": "Kerry International Dark Sky Reserve",
+    "body": "<p>Located along Ireland’s stunning Wild Atlantic Way, the Kerry International Dark Sky Reserve is the only Gold Tier dark sky reserve in the Northern Hemisphere and offers some of the darkest and most spectacular night skies in the world.</p><p>Far from the glow of city lights, visitors can admire countless stars, spot constellations, and experience the Milky Way stretching across the sky. It’s a magical destination for stargazers, nature lovers, and anyone wishing to discover the wonders of the universe.</p>",
+    "button": "About the reserve",
+    "facts": [
+      {
+        "value": "Gold",
+        "label": "Tier dark sky quality"
+      },
+      {
+        "value": "2014",
+        "label": "Designated by DarkSky International"
+      },
+      {
+        "value": "~700 km²",
+        "label": "of protected night sky"
+      },
+      {
+        "value": "1000s",
+        "label": "of stars visible on a clear night"
+      }
+    ]
+  },
+  "steps": {
+    "eyebrow": "Your night out",
+    "title": "Three steps to the stars",
+    "items": [
+      {
+        "title": "Choose a guide",
+        "text": "Browse our guides by location and language."
+      },
+      {
+        "title": "Get in touch",
+        "text": "Contact your guide directly to plan the date, group and meeting point."
+      },
+      {
+        "title": "Look up",
+        "text": "Dress warm, bring curiosity — your guide brings the stories and the stars."
+      }
+    ]
+  },
+  "news": {
+    "eyebrow": "News",
+    "title": "Latest from the dark side",
+    "button": "All news"
+  },
+  "cta": {
+    "eyebrow": "Become a member",
+    "title": "Are you a Night Sky Guide?",
+    "text": "Join our network of trained guides and help visitors discover the night sky above Kerry.",
+    "primaryButton": "Membership",
+    "secondaryButton": "Email us"
+  }
+}

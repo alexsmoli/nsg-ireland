@@ -1,0 +1,19 @@
+{
+  "contact": {
+    "email": "info@nightskyguides.ie",
+    "phone": "",
+    "region": "Iveragh Peninsula, Co. Kerry, Ireland"
+  },
+  "socials": {
+    "facebook": "",
+    "instagram": ""
+  },
+  "footer": {
+    "tagline": "Local guides to some of the darkest skies in Europe — stars, stories and unforgettable nights on Ireland's Wild Atlantic Way.",
+    "bottomLine": "Keep it dark. Look up."
+  },
+  "notFound": {
+    "text": "Lost in space — this page drifted out of orbit.",
+    "button": "Back to Earth"
+  }
+}

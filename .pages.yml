@@ -1,7 +1,300 @@
 media:
   input: public
   output: /
+
 content:
+  # ───────────────────────── Pages ─────────────────────────
+  - name: home
+    label: Home page
+    type: file
+    path: src/data/home.json
+    format: json
+    fields:
+      - name: hero
+        label: Hero (top of the page)
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: subtitle, label: Subtitle, type: text }
+          - { name: primaryButton, label: Yellow button (jumps to guides), type: string }
+          - { name: secondaryButton, label: Outline button (Dark Sky Reserve), type: string }
+      - name: intro
+        label: Intro
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+      - name: experiences
+        label: Experience tiles
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: icon
+            label: Icon
+            type: select
+            options:
+              values:
+                - { name: star, label: Star }
+                - { name: planet, label: Planet }
+                - { name: milkyway, label: Milky Way }
+                - { name: book, label: Book / stories }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+      - name: guides
+        label: Guides section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: "Intro ({count} = number of guides)", type: text }
+          - { name: button, label: Button, type: string }
+          - { name: mapTitle, label: Map title, type: string }
+      - name: reserve
+        label: Dark Sky Reserve section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: body, label: Text, type: rich-text }
+          - { name: button, label: Button, type: string }
+          - name: facts
+            label: Fact tiles
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{value} {label}"
+            fields:
+              - { name: value, label: Big value, type: string }
+              - { name: label, label: Label, type: string }
+      - name: steps
+        label: "Steps (\"Three steps to the stars\")"
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - name: items
+            label: Steps
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: text, label: Text, type: text }
+      - name: news
+        label: News section
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: button, label: Button, type: string }
+      - name: cta
+        label: Membership box (bottom)
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: primaryButton, label: Yellow button (Membership page), type: string }
+          - { name: secondaryButton, label: Outline button (email), type: string }
+
+  - name: about
+    label: About page
+    type: file
+    path: src/pages/about.md
+    fields:
+      - { name: layout, type: string, hidden: true, default: "../layouts/AboutLayout.astro" }
+      - { name: eyebrow, label: Small line above the title, type: string }
+      - { name: title, label: Title, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: description, label: SEO description, type: text }
+      - { name: body, label: Body, type: rich-text, options: { input: public/assets, output: /assets } }
+      - { name: guidesEyebrow, label: Guides section – small line, type: string }
+      - { name: guidesTitle, label: Guides section – title, type: string }
+      - { name: guidesButton, label: "Guides section – button ({count} = number of guides)", type: string }
+
+  - name: guides-page
+    label: Guides page
+    type: file
+    path: src/data/guides-page.json
+    format: json
+    fields:
+      - { name: seoDescription, label: SEO description, type: text }
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro, type: text }
+      - name: map
+        label: Map
+        type: object
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: hint, label: Hint below the title, type: string }
+      - { name: filterLabel, label: Language filter label, type: string }
+      - { name: filterAll, label: "\"All\" button", type: string }
+
+  - name: reserve
+    label: Dark Sky Reserve page
+    type: file
+    path: src/data/reserve.json
+    format: json
+    fields:
+      - { name: seoDescription, label: SEO description, type: text }
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro, type: text }
+      - { name: body, label: Main text, type: rich-text }
+      - name: atAGlance
+        label: "\"At a glance\" box"
+        type: object
+        fields:
+          - { name: title, label: Box title, type: string }
+          - name: items
+            label: Rows
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}: {value}"
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: value, label: Value, type: string }
+      - name: highlights
+        label: Highlights
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - name: items
+            label: Tiles
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: text, label: Text, type: text }
+      - name: tips
+        label: Stargazing tips
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - name: items
+            label: Tips
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - { name: title, label: Title, type: string }
+              - { name: text, label: Text, type: text }
+      - { name: primaryButton, label: Yellow button (Guides page), type: string }
+      - { name: secondaryButton, label: Outline button (Contact page), type: string }
+
+  - name: membership
+    label: Membership page
+    type: file
+    path: src/data/membership.json
+    format: json
+    fields:
+      - { name: seoDescription, label: SEO description, type: text }
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro, type: text }
+      - { name: benefitsTitle, label: Benefits – title, type: string }
+      - { name: benefits, label: Benefits, type: string, list: true }
+      - name: box
+        label: Info box
+        type: object
+        fields:
+          - { name: badge, label: Badge, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: button, label: Button (opens email), type: string }
+
+  - name: contact
+    label: Contact page
+    type: file
+    path: src/data/contact.json
+    format: json
+    fields:
+      - { name: seoDescription, label: SEO description, type: text }
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - { name: eyebrow, label: Small line above the title, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: intro, label: Intro, type: text }
+      - name: bookingTile
+        label: "\"Book a night out\" tile"
+        type: object
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: value, label: Text, type: string }
+      - name: form
+        label: Contact form
+        type: object
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: subjects, label: Subject options, type: string, list: true }
+          - { name: button, label: Button, type: string }
+          - { name: note, label: Note below the button, type: string }
+
+  - name: settings
+    label: Site settings (contact, socials, footer)
+    type: file
+    path: src/data/settings.json
+    format: json
+    fields:
+      - name: contact
+        label: Contact details (used site-wide)
+        type: object
+        fields:
+          - { name: email, label: Email, type: string, required: true }
+          - { name: phone, label: Phone (leave empty to hide), type: string }
+          - { name: region, label: Region, type: string }
+      - name: socials
+        label: Social media (leave empty to hide)
+        type: object
+        fields:
+          - { name: facebook, label: Facebook URL, type: string }
+          - { name: instagram, label: Instagram URL, type: string }
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - { name: tagline, label: Text under the logo, type: text }
+          - { name: bottomLine, label: Bottom line (right), type: string }
+      - name: notFound
+        label: 404 page
+        type: object
+        fields:
+          - { name: text, label: Text, type: string }
+          - { name: button, label: Button, type: string }
+
+  # ──────────────────────── Collections ────────────────────────
   - name: guides
     label: Guides
     type: collection
@@ -21,32 +314,22 @@ content:
       - { name: order, label: Sort order, type: number }
       - { name: placeholder, label: Placeholder, type: boolean }
       - { name: body, label: Short bio, type: rich-text }
+
   - name: posts
     label: News
     type: collection
     path: src/content/blog
     view:
-      fields: [ title, draft, date ]
+      fields: [ title, draft, pubDatetime ]
     fields:
-      - { name: author, label: Author, type: string }
-      - { name: pubDatetime, label: Date, type: date }
-      - { name: modDatetime, label: Date, type: date }
       - { name: title, label: Title, type: string, required: true }
-      - { name: ogImage, label: Title, type: string }
-      - { name: slug, label: Slug, type: string }
-      - { name: featured, label: Featured, type: boolean }
-      - { name: draft, label: Draft, type: boolean }
+      - { name: description, label: Teaser / SEO description, type: text, required: true }
+      - { name: pubDatetime, label: Published, type: date, required: true }
+      - { name: modDatetime, label: Last updated, type: date }
+      - { name: author, label: Author, type: string }
+      - { name: slug, label: Slug (URL), type: string }
       - { name: tags, label: Tags, type: string, list: true }
-      - { name: description, label: Description, type: string }
+      - { name: featured, label: Featured, type: boolean }
+      - { name: draft, label: Draft (hidden), type: boolean }
+      - { name: ogImage, label: Social sharing image URL, type: string }
       - { name: body, label: Body, type: rich-text }
-  - name: about
-    label: About page
-    type: file
-    path: src/pages/about.md
-    fields:
-      - { name: layout, type: string, hidden: true, default: "../layouts/AboutLayout.astro" }
-      - { name: title, label: Title, type: string }
-      - { name: eyebrow, label: Eyebrow, type: string }
-      - { name: intro, label: Intro, type: text }
-      - { name: description, label: SEO description, type: text }
-      - { name: body, label: Body, type: rich-text, options: { input: public/assets, output: /assets } }

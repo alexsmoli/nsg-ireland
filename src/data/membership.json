@@ -1,0 +1,21 @@
+{
+  "seoDescription": "",
+  "hero": {
+    "eyebrow": "Membership",
+    "title": "Join the Night Sky Guides",
+    "intro": "For trained guides who want to share the night sky of Kerry with visitors from all over the world."
+  },
+  "benefitsTitle": "What membership offers",
+  "benefits": [
+    "Your own profile on the Night Sky Guides Ireland website",
+    "A pin on our guide map so visitors can find you",
+    "Exchange and further training with other guides",
+    "News, sky events and resources for your tours"
+  ],
+  "box": {
+    "badge": "Coming soon",
+    "title": "Membership details",
+    "text": "We are finalising our membership details. Interested? Send us a short message and we'll get back to you as soon as they are ready.",
+    "button": "Register your interest"
+  }
+}

@@ -7,6 +7,7 @@ import PageHero from "@components/PageHero.astro";
 import GuideCard from "@components/GuideCard.astro";
 import GuideMap from "@components/GuideMap.astro";
 import { SITE } from "@config";
+import page from "../data/guides-page.json";
 
 const guides = (await getCollection("guides")).sort(
   (a, b) => a.data.order - b.data.order
@@ -14,30 +15,33 @@ const guides = (await getCollection("guides")).sort(
 const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
 ---
 
-<Layout
-  title={`Our Guides | ${SITE.title}`}
-  description="Meet the trained Night Sky Guides of Kerry — find a guide near you or one who speaks your language."
->
+<Layout title={`Our Guides | ${SITE.title}`} description={page.seoDescription}>
   <Header activeNav="guides" transparent />
   <main id="main-content">
     <PageHero
-      eyebrow="Who we are"
-      title="Meet our Night Sky Guides"
-      intro="Local people with a passion for the night sky, trained to share the stars, planets and stories above Kerry. Find a guide near you — or one who speaks your language."
+      eyebrow={page.hero.eyebrow}
+      title={page.hero.title}
+      intro={page.hero.intro}
     />
 
     <section class="container-wide py-16 sm:py-20">
-      <h2 class="section-title">Where our guides are</h2>
-      <p class="mb-8 mt-3 text-white/70">Tap a star to see who guides there.</p>
+      <h2 class="section-title">{page.map.title}</h2>
+      <p class="mb-8 mt-3 text-white/70">{page.map.hint}</p>
       <GuideMap guides={guides} />
     </section>
 
     <section class="container-wide pb-24">
       <div class="filter" role="group" aria-label="Filter by language">
-        <span class="filter-label">Language</span>
+        <span class="filter-label">{page.filterLabel}</span>
         <div class="chips">
-          <button class="chip is-active" data-lang="">All</button>
-          {languages.map(lang => <button class="chip" data-lang={lang}>{lang}</button>)}
+          <button class="chip is-active" data-lang="">{page.filterAll}</button>
+          {
+            languages.map(lang => (
+              <button class="chip" data-lang={lang}>
+                {lang}
+              </button>
+            ))
+          }
         </div>
       </div>
 
@@ -92,7 +96,8 @@ const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
       const lang = chip.dataset.lang ?? "";
       chips.forEach(c => c.classList.toggle("is-active", c === chip));
       items.forEach(item => {
-        item.hidden = !!lang && !(item.dataset.langs ?? "").split("|").includes(lang);
+        item.hidden =
+          !!lang && !(item.dataset.langs ?? "").split("|").includes(lang);
       });
     })
   );

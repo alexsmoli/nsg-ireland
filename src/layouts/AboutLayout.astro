@@ -14,6 +14,9 @@ export interface Props {
     eyebrow?: string;
     intro?: string;
     description?: string;
+    guidesEyebrow?: string;
+    guidesTitle?: string;
+    guidesButton?: string;
   };
 }
 
@@ -43,8 +46,10 @@ const guides = (await getCollection("guides")).sort(
 
     <section class="bg-[#050d0f] py-16 sm:py-24">
       <div class="container-wide">
-        <p class="eyebrow">Who we are</p>
-        <h2 class="section-title">The guides behind the stars</h2>
+        <p class="eyebrow">{frontmatter.guidesEyebrow ?? "Who we are"}</p>
+        <h2 class="section-title">
+          {frontmatter.guidesTitle ?? "The guides behind the stars"}
+        </h2>
         <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {
             guides.slice(0, 6).map(guide => (
@@ -56,7 +61,12 @@ const guides = (await getCollection("guides")).sort(
         </ul>
         <div class="mt-10 text-center">
           <a href={withBase("/guides/")} class="btn-primary">
-            Meet all {guides.length} guides
+            {
+              (frontmatter.guidesButton ?? "Meet all {count} guides").replace(
+                "{count}",
+                String(guides.length)
+              )
+            }
           </a>
         </div>
       </div>

@@ -1,0 +1,76 @@
+{
+  "seoDescription": "The Kerry International Dark Sky Reserve on Ireland’s Wild Atlantic Way offers some of the darkest night skies in the world.",
+  "hero": {
+    "eyebrow": "Gold Tier · Wild Atlantic Way",
+    "title": "Kerry International Dark Sky Reserve",
+    "intro": "Some of the darkest and most spectacular night skies in the world — right on Ireland’s Wild Atlantic Way."
+  },
+  "body": "<p>Located along Ireland’s stunning Wild Atlantic Way, the Kerry International Dark Sky Reserve is the only Gold Tier dark sky reserve in the Northern Hemisphere and offers some of the darkest and most spectacular night skies in the world.</p><p>Far from the glow of city lights, visitors can admire countless stars, spot constellations, and experience the Milky Way stretching across the sky. It’s a magical destination for stargazers, nature lovers, and anyone wishing to discover the wonders of the universe.</p>",
+  "atAGlance": {
+    "title": "At a glance",
+    "items": [
+      {
+        "label": "Where",
+        "value": "Iveragh Peninsula, Co. Kerry"
+      },
+      {
+        "label": "Designated",
+        "value": "2014 by DarkSky International"
+      },
+      {
+        "label": "Rating",
+        "value": "Gold Tier"
+      },
+      {
+        "label": "Size",
+        "value": "approx. 700 km²"
+      }
+    ]
+  },
+  "highlights": {
+    "eyebrow": "Why it’s special",
+    "title": "A sky like our ancestors saw it",
+    "items": [
+      {
+        "title": "Gold Tier skies",
+        "text": "The highest rating for night sky quality — the Milky Way is clearly visible and casts its own faint glow."
+      },
+      {
+        "title": "Mountains meet the Atlantic",
+        "text": "The reserve lies on the Iveragh Peninsula, sheltered by Kerry’s mountains on one side and the Atlantic Ocean on the other."
+      },
+      {
+        "title": "A living landscape",
+        "text": "Ancient stone forts, ogham stones and coastal villages — the same sky has been watched here for thousands of years."
+      },
+      {
+        "title": "Dark by design",
+        "text": "Local communities protect the darkness with sensible lighting, so the stars stay bright for people and wildlife."
+      }
+    ]
+  },
+  "tips": {
+    "eyebrow": "Before you go",
+    "title": "Stargazing tips",
+    "items": [
+      {
+        "title": "Check the moon",
+        "text": "The darkest skies are around new moon. A bright moon hides fainter stars and the Milky Way."
+      },
+      {
+        "title": "Give your eyes time",
+        "text": "It takes 20–30 minutes for your eyes to adapt to the dark. Avoid white light — use a red torch."
+      },
+      {
+        "title": "Dress for the Atlantic",
+        "text": "Even in summer, nights get cold. Warm layers, a hat and waterproofs make all the difference."
+      },
+      {
+        "title": "Watch the weather",
+        "text": "Kerry weather changes fast. Your guide knows where to find a gap in the clouds."
+      }
+    ]
+  },
+  "primaryButton": "Find a guide",
+  "secondaryButton": "Ask us a question"
+}

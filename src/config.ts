@@ -1,4 +1,5 @@
 import type { Site, SocialObjects } from "./types";
+import settings from "./data/settings.json";
 
 export const SITE: Site = {
   website: "https://alexsmoli.github.io/nsg-ireland/", // switch to the custom domain (and remove `base` in astro.config.ts) once DNS is set up
@@ -11,12 +12,8 @@ export const SITE: Site = {
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
 
-// TODO: replace placeholder contact details
-export const CONTACT = {
-  email: "info@nightskyguides.ie",
-  phone: "",
-  region: "Iveragh Peninsula, Co. Kerry, Ireland",
-};
+// Edited in Pages CMS → "Site settings" (src/data/settings.json)
+export const CONTACT = settings.contact;
 
 export const NAV_LINKS = [
   { href: "/about/", label: "About Us", key: "about" },
@@ -41,19 +38,19 @@ export const LOGO_IMAGE = {
   height: 46,
 };
 
-// TODO: add real social profiles and set active: true
+// Social links are edited in Pages CMS → "Site settings"; empty = hidden
 export const SOCIALS: SocialObjects = [
   {
     name: "Facebook",
-    href: "https://www.facebook.com/",
+    href: settings.socials.facebook,
     linkTitle: `${SITE.title} on Facebook`,
-    active: false,
+    active: Boolean(settings.socials.facebook),
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/",
+    href: settings.socials.instagram,
     linkTitle: `${SITE.title} on Instagram`,
-    active: false,
+    active: Boolean(settings.socials.instagram),
   },
   {
     name: "Mail",

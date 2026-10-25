@@ -1,0 +1,23 @@
+{
+  "seoDescription": "",
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Let’s look up together",
+    "intro": "Questions about a night out, the dark sky reserve or becoming a guide? We'd love to hear from you."
+  },
+  "bookingTile": {
+    "label": "Book a night out",
+    "value": "Contact a guide directly →"
+  },
+  "form": {
+    "title": "Send us a message",
+    "subjects": [
+      "Stargazing with a guide",
+      "Kerry Dark Sky Reserve",
+      "Membership",
+      "Something else"
+    ],
+    "button": "Open in email app",
+    "note": "This opens your email app with the message ready to send."
+  }
+}
