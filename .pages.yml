@@ -2,8 +2,27 @@ media:
   input: public
   output: /
 content:
+  - name: guides
+    label: Guides
+    type: collection
+    path: src/content/guides
+    view:
+      fields: [ name, location ]
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - { name: location, label: Location, type: string, required: true }
+      - { name: languages, label: Languages, type: string, list: true }
+      - { name: email, label: Email, type: string }
+      - { name: phone, label: Phone, type: string }
+      - { name: website, label: Website, type: string }
+      - { name: photo, label: Photo, type: image, options: { input: public/assets/guides, output: /assets/guides } }
+      - { name: lat, label: Latitude (map pin), type: number }
+      - { name: lng, label: Longitude (map pin), type: number }
+      - { name: order, label: Sort order, type: number }
+      - { name: placeholder, label: Placeholder, type: boolean }
+      - { name: body, label: Short bio, type: rich-text }
   - name: posts
-    label: Posts
+    label: News
     type: collection
     path: src/content/blog
     view:
@@ -27,4 +46,7 @@ content:
     fields:
       - { name: layout, type: string, hidden: true, default: "../layouts/AboutLayout.astro" }
       - { name: title, label: Title, type: string }
+      - { name: eyebrow, label: Eyebrow, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: description, label: SEO description, type: text }
       - { name: body, label: Body, type: rich-text, options: { input: public/assets, output: /assets } }

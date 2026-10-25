@@ -1,0 +1,133 @@
+---
+// Animated night sky (twinkling stars, Milky Way glow, the odd shooting star).
+// Fills its nearest positioned parent.
+export interface Props {
+  density?: number;
+  milkyWay?: boolean;
+}
+
+const { density = 1, milkyWay = true } = Astro.props;
+---
+
+<div class="starfield" aria-hidden="true">
+  {milkyWay && <div class="milky-way" />}
+  <canvas data-starfield data-density={density}></canvas>
+</div>
+
+<style>
+  .starfield {
+    @apply pointer-events-none absolute inset-0 overflow-hidden;
+    background:
+      radial-gradient(
+        ellipse at 70% 110%,
+        rgba(31, 138, 92, 0.35),
+        transparent 55%
+      ),
+      radial-gradient(ellipse at 20% -10%, rgba(30, 64, 120, 0.45), transparent 60%),
+      linear-gradient(180deg, #03060b 0%, #07111a 55%, #0c1c26 100%);
+  }
+  .milky-way {
+    @apply absolute;
+    inset: -20% -10%;
+    background:
+      radial-gradient(
+        ellipse 18% 60% at 50% 50%,
+        rgba(255, 244, 220, 0.16),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 30% 80% at 52% 48%,
+        rgba(160, 180, 255, 0.1),
+        transparent 70%
+      );
+    transform: rotate(-35deg);
+    filter: blur(6px);
+  }
+  canvas {
+    @apply absolute inset-0 h-full w-full;
+  }
+</style>
+
+<script>
+  type Star = { x: number; y: number; r: number; a: number; s: number; p: number };
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll<HTMLCanvasElement>("canvas[data-starfield]").forEach(canvas => {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const density = Number(canvas.dataset.density ?? 1);
+    let stars: Star[] = [];
+    let shooting: { x: number; y: number; vx: number; vy: number; life: number } | null = null;
+    let w = 0;
+    let h = 0;
+    let visible = true;
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.round(((w * h) / 2600) * density);
+      stars = Array.from({ length: count }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() ** 3 * 1.6 + 0.3,
+        a: Math.random() * 0.6 + 0.3,
+        s: Math.random() * 0.002 + 0.0006,
+        p: Math.random() * Math.PI * 2,
+      }));
+      if (reduceMotion) draw(0);
+    };
+
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, w, h);
+      for (const star of stars) {
+        const tw = reduceMotion ? 1 : 0.65 + 0.35 * Math.sin(t * star.s + star.p);
+        ctx.globalAlpha = star.a * tw;
+        ctx.fillStyle = star.r > 1.3 ? "#fff6dd" : "#ffffff";
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      if (shooting) {
+        const { x, y, vx, vy, life } = shooting;
+        const grad = ctx.createLinearGradient(x, y, x - vx * 18, y - vy * 18);
+        grad.addColorStop(0, `rgba(255,255,255,${life})`);
+        grad.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x - vx * 18, y - vy * 18);
+        ctx.stroke();
+        shooting.x += vx;
+        shooting.y += vy;
+        shooting.life -= 0.012;
+        if (shooting.life <= 0) shooting = null;
+      } else if (Math.random() < 0.003) {
+        shooting = {
+          x: Math.random() * w * 0.8 + w * 0.1,
+          y: Math.random() * h * 0.4,
+          vx: 7 + Math.random() * 4,
+          vy: 3 + Math.random() * 2,
+          life: 1,
+        };
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    const loop = (t: number) => {
+      if (visible) draw(t);
+      requestAnimationFrame(loop);
+    };
+
+    new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(canvas);
+    window.addEventListener("resize", resize);
+    resize();
+    if (!reduceMotion) requestAnimationFrame(loop);
+  });
+</script>

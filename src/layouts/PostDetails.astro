@@ -47,16 +47,16 @@ const layoutProps = {
 ---
 
 <Layout {...layoutProps}>
-  <Header />
+  <Header activeNav="posts" />
 
   <!-- <div class="progress-container fixed top-0 z-10 h-1 w-full bg-skin-fill">
     <div class="progress-bar h-1 w-0 bg-skin-accent" id="myBar"></div>
   </div> -->
 
-  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-4">
     <button
-      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
-      onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+      class="focus-outline mb-2 mt-8 flex items-center gap-1 text-white/70 hover:text-star"
+      onclick="(() => (history.length === 1) ? window.location = '/posts/' : history.back())()"
     >
       <svg xmlns="http://www.w3.org/2000/svg"
         ><path
@@ -77,7 +77,7 @@ const layoutProps = {
       <Content />
     </article>
 
-    <ul class="my-8">
+    <ul class="my-8 flex flex-wrap gap-2">
       {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
     </ul>
 
@@ -107,7 +107,7 @@ const layoutProps = {
     @apply mx-auto w-full max-w-3xl px-4 pb-12;
   }
   .post-title {
-    @apply text-2xl font-semibold text-skin-accent;
+    @apply font-display text-3xl font-extrabold leading-tight text-white sm:text-5xl;
   }
 </style>
 

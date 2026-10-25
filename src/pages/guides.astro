@@ -1,0 +1,99 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import PageHero from "@components/PageHero.astro";
+import GuideCard from "@components/GuideCard.astro";
+import GuideMap from "@components/GuideMap.astro";
+import { SITE } from "@config";
+
+const guides = (await getCollection("guides")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
+---
+
+<Layout
+  title={`Our Guides | ${SITE.title}`}
+  description="Meet the trained Night Sky Guides of Kerry — find a guide near you or one who speaks your language."
+>
+  <Header activeNav="guides" transparent />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Who we are"
+      title="Meet our Night Sky Guides"
+      intro="Local people with a passion for the night sky, trained to share the stars, planets and stories above Kerry. Find a guide near you — or one who speaks your language."
+    />
+
+    <section class="container-wide py-16 sm:py-20">
+      <h2 class="section-title">Where our guides are</h2>
+      <p class="mb-8 mt-3 text-white/70">Tap a star to see who guides there.</p>
+      <GuideMap guides={guides} />
+    </section>
+
+    <section class="container-wide pb-24">
+      <div class="filter" role="group" aria-label="Filter by language">
+        <span class="filter-label">Language</span>
+        <div class="chips">
+          <button class="chip is-active" data-lang="">All</button>
+          {languages.map(lang => <button class="chip" data-lang={lang}>{lang}</button>)}
+        </div>
+      </div>
+
+      <ul class="guide-grid">
+        {
+          guides.map(guide => (
+            <li data-langs={guide.data.languages.join("|")}>
+              <GuideCard guide={guide} showBio compact />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .filter {
+    @apply mb-8 flex flex-col gap-3 sm:flex-row sm:items-center;
+  }
+  .filter-label {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-white/50;
+  }
+  .chips {
+    @apply -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0;
+    scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+  .chip {
+    @apply min-h-[40px] shrink-0 rounded-full border border-white/20 px-4 text-sm text-white/80 transition hover:border-aurora;
+  }
+  .chip.is-active {
+    @apply border-star bg-star font-semibold text-night-950;
+  }
+  .guide-grid {
+    @apply grid gap-5 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .guide-grid li {
+    scroll-margin-top: 6rem;
+  }
+</style>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>(".chip");
+  const items = document.querySelectorAll<HTMLElement>(".guide-grid > li");
+
+  chips.forEach(chip =>
+    chip.addEventListener("click", () => {
+      const lang = chip.dataset.lang ?? "";
+      chips.forEach(c => c.classList.toggle("is-active", c === chip));
+      items.forEach(item => {
+        item.hidden = !!lang && !(item.dataset.langs ?? "").split("|").includes(lang);
+      });
+    })
+  );
+</script>

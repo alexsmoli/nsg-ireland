@@ -1,36 +1,24 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "About"
+title: "Sharing the night sky of Kerry"
+eyebrow: "About us"
+intro: "Night Sky Guides Ireland is a network of trained local guides who love the dark skies of Kerry — and love sharing them even more."
+description: "About Night Sky Guides Ireland — a network of trained local guides in the Kerry International Dark Sky Reserve."
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+## Our story
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+Kerry is home to one of the darkest skies on Earth. Yet many visitors — and plenty of locals — have never really seen it. **Night Sky Guides Ireland** was founded to change that.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+Our guides have completed a dedicated Night Sky Guide training covering astronomy, the history and folklore of the sky, dark sky protection and how to lead safe, memorable night-time experiences.
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+## What we do
 
-## Tech Stack
+- **Guided stargazing** for individuals, families and groups
+- **Stories of the sky** — from ancient Irish myths to modern astronomy
+- **Telescope sessions** with planets, the Moon and deep-sky objects
+- **Dark sky awareness** — helping protect the night for future generations
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+## Our promise
 
-## Features
-
-Here are certain features of this site.
-
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
-
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+Every guide is local, trained and passionate. Whether you're a curious beginner or a passionate stargazer, we'll help you feel at home under the stars.

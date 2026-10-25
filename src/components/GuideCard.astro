@@ -1,0 +1,130 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  guide: CollectionEntry<"guides">;
+  showBio?: boolean;
+  /** Small avatar next to the name on phones instead of a full-width photo */
+  compact?: boolean;
+}
+
+const { guide, showBio = false, compact = false } = Astro.props;
+const { name, location, languages, email, phone, website, photo } = guide.data;
+const { Content } = showBio ? await guide.render() : { Content: null };
+---
+
+<article class:list={["guide-card card-glass", { compact }]} id={guide.slug}>
+  <div class="photo">
+    {
+      photo ? (
+        <img src={photo} alt={`Portrait of ${name}`} loading="lazy" />
+      ) : (
+        <svg viewBox="0 0 120 120" class="silhouette" aria-hidden="true">
+          <circle cx="60" cy="44" r="22" />
+          <path d="M18 120c0-26 19-42 42-42s42 16 42 42z" />
+        </svg>
+      )
+    }
+  </div>
+  <div class="head">
+    <h3>{name}</h3>
+    <p class="location">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+      </svg>
+      {location}
+    </p>
+  </div>
+  <div class="details">
+    <p class="label">Languages</p>
+    <p class="langs">
+      {languages.map(lang => <span>{lang}</span>)}
+    </p>
+    {Content && <div class="bio"><Content /></div>}
+    <div class="contact">
+      {
+        email && (
+          <a href={`mailto:${email}`} class="contact-link" aria-label={`Contact ${name}`}>
+            Contact
+          </a>
+        )
+      }
+      {phone && <a href={`tel:${phone}`} class="contact-link ghost">Call</a>}
+      {
+        website && (
+          <a href={website} class="contact-link ghost" target="_blank" rel="noopener">
+            Website
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .guide-card {
+    scroll-margin-top: 6rem;
+    @apply grid h-full grid-cols-1 grid-rows-[auto_auto_1fr] overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-aurora/40;
+  }
+  .photo {
+    @apply relative aspect-[4/3] overflow-hidden;
+    background: radial-gradient(circle at 50% 30%, #1d3b45, #0c1c26 70%);
+  }
+  .photo img {
+    @apply h-full w-full object-cover;
+  }
+  .silhouette {
+    @apply absolute bottom-0 left-1/2 h-[85%] w-auto -translate-x-1/2 fill-[#8a96a0] opacity-70;
+  }
+  .head {
+    @apply px-5 pt-5;
+  }
+  h3 {
+    @apply text-xl font-bold text-white;
+  }
+  .location {
+    @apply mt-1 flex items-center gap-1.5 text-sm text-white/80;
+  }
+  .location svg {
+    @apply h-4 w-4 shrink-0 fill-aurora;
+  }
+  .details {
+    @apply flex flex-col px-5 pb-5 pt-4;
+  }
+  .label {
+    @apply text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/50;
+  }
+  .langs {
+    @apply mt-1.5 flex flex-wrap gap-1.5;
+  }
+  .langs span {
+    @apply rounded-full bg-forest/60 px-2.5 py-0.5 text-xs text-aurora;
+  }
+  .bio {
+    @apply mt-4 text-sm leading-relaxed text-white/70;
+  }
+  .contact {
+    @apply mt-auto flex flex-wrap gap-2 pt-5;
+  }
+  .contact-link {
+    @apply inline-flex min-h-[44px] items-center rounded-full bg-star px-5 text-sm font-semibold text-night-950 transition hover:bg-[#ffd98a];
+  }
+  .contact-link.ghost {
+    @apply border border-white/25 bg-transparent text-white hover:border-aurora hover:text-aurora;
+  }
+
+  @media (max-width: 639px) {
+    .compact {
+      @apply grid-cols-[6rem_1fr] grid-rows-[auto_1fr] items-center;
+    }
+    .compact .photo {
+      @apply ml-4 mt-4 aspect-square w-20 rounded-2xl;
+    }
+    .compact .head {
+      @apply px-4 pt-4;
+    }
+    .compact .details {
+      @apply col-span-2 self-stretch px-4 pb-4;
+    }
+  }
+</style>

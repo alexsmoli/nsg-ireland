@@ -1,0 +1,58 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import PageHero from "@components/PageHero.astro";
+import { CONTACT, SITE } from "@config";
+
+// TODO: replace with the final membership details
+const benefits = [
+  "Your own profile on the Night Sky Guides Ireland website",
+  "A pin on our guide map so visitors can find you",
+  "Exchange and further training with other guides",
+  "News, sky events and resources for your tours",
+];
+---
+
+<Layout title={`Membership | ${SITE.title}`}>
+  <Header activeNav="membership" transparent />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Membership"
+      title="Join the Night Sky Guides"
+      intro="For trained guides who want to share the night sky of Kerry with visitors from all over the world."
+    />
+
+    <section class="container-wide grid gap-10 py-16 sm:py-24 lg:grid-cols-2">
+      <div>
+        <h2 class="section-title">What membership offers</h2>
+        <ul class="mt-8 space-y-4">
+          {
+            benefits.map(benefit => (
+              <li class="flex gap-3 text-white/85">
+                <svg viewBox="0 0 24 24" class="mt-0.5 h-6 w-6 shrink-0 fill-star" aria-hidden="true">
+                  <path d="M12 2l2.4 6.9H22l-6 4.6 2.3 7.1L12 16.2 5.7 20.6 8 13.5 2 8.9h7.6z" />
+                </svg>
+                <span>{benefit}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="card-glass flex flex-col justify-center p-8 sm:p-10">
+        <span class="w-fit rounded-full bg-forest/60 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-aurora">
+          Coming soon
+        </span>
+        <h3 class="mt-4 text-2xl font-bold text-white">Membership details</h3>
+        <p class="mt-3 text-white/70">
+          We are finalising our membership details. Interested? Send us a short
+          message and we'll get back to you as soon as they are ready.
+        </p>
+        <a href={`mailto:${CONTACT.email}?subject=Membership`} class="btn-primary mt-8 w-full sm:w-fit">
+          Register your interest
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

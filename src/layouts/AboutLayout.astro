@@ -1,27 +1,64 @@
 ---
+import { getCollection } from "astro:content";
 import { SITE } from "@config";
-import Breadcrumbs from "@components/Breadcrumbs.astro";
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
+import PageHero from "@components/PageHero.astro";
+import GuideCard from "@components/GuideCard.astro";
 import Layout from "./Layout.astro";
 
 export interface Props {
   frontmatter: {
     title: string;
+    eyebrow?: string;
+    intro?: string;
     description?: string;
   };
 }
 
 const { frontmatter } = Astro.props;
+
+const guides = (await getCollection("guides")).sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
-  <Header activeNav="about" />
-  <Breadcrumbs />
+<Layout
+  title={`About Us | ${SITE.title}`}
+  description={frontmatter.description}
+>
+  <Header activeNav="about" transparent />
   <main id="main-content">
-    <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0">
-      <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
-      <slot />
+    <PageHero
+      eyebrow={frontmatter.eyebrow ?? "About us"}
+      title={frontmatter.title}
+      intro={frontmatter.intro}
+    />
+    <section class="container-wide py-16 sm:py-24">
+      <article class="prose prose-lg max-w-3xl">
+        <slot />
+      </article>
+    </section>
+
+    <section class="bg-[#050d0f] py-16 sm:py-24">
+      <div class="container-wide">
+        <p class="eyebrow">Who we are</p>
+        <h2 class="section-title">The guides behind the stars</h2>
+        <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {
+            guides.slice(0, 6).map(guide => (
+              <li>
+                <GuideCard guide={guide} compact />
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-10 text-center">
+          <a href="/guides/" class="btn-primary">
+            Meet all {guides.length} guides
+          </a>
+        </div>
+      </div>
     </section>
   </main>
   <Footer />
