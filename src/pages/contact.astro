@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@utils/withBase";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -16,7 +17,9 @@ import { CONTACT, SITE } from "@config";
       intro="Questions about a night out, the dark sky reserve or becoming a guide? We'd love to hear from you."
     />
 
-    <section class="container-wide grid gap-8 py-16 sm:py-24 lg:grid-cols-[1fr_1.4fr]">
+    <section
+      class="container-wide grid gap-8 py-16 sm:py-24 lg:grid-cols-[1fr_1.4fr]"
+    >
       <div class="space-y-4">
         <a href={`mailto:${CONTACT.email}`} class="contact-tile card-glass">
           <span class="label">Email</span>
@@ -34,7 +37,7 @@ import { CONTACT, SITE } from "@config";
           <span class="label">Region</span>
           <span class="value">{CONTACT.region}</span>
         </div>
-        <a href="/guides/" class="contact-tile card-glass">
+        <a href={withBase("/guides/")} class="contact-tile card-glass">
           <span class="label">Book a night out</span>
           <span class="value">Contact a guide directly →</span>
         </a>
@@ -99,8 +102,12 @@ import { CONTACT, SITE } from "@config";
   document.getElementById("contact-form")?.addEventListener("submit", e => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(`${data.get("subject")} – ${data.get("name")}`);
-    const body = encodeURIComponent(`${data.get("message")}\n\n${data.get("name")}`);
+    const subject = encodeURIComponent(
+      `${data.get("subject")} – ${data.get("name")}`
+    );
+    const body = encodeURIComponent(
+      `${data.get("message")}\n\n${data.get("name")}`
+    );
     window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
   });
 </script>

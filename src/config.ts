@@ -1,7 +1,7 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://nightskyguides.ie/", // TODO: replace with the deployed domain
+  website: "https://alexsmoli.github.io/nsg-ireland/", // switch to the custom domain (and remove `base` in astro.config.ts) once DNS is set up
   author: "Night Sky Guides Ireland",
   desc: "Look up and explore the wonders of the universe with your personal Night Sky Guide in the Kerry International Dark Sky Reserve.",
   title: "Night Sky Guides Ireland",

@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@utils/withBase";
 import { type CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
@@ -30,7 +31,7 @@ const { currentPage, totalPages, paginatedPosts, tag, tagName } = Astro.props;
     <ul>
       {
         paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
+          <Card href={withBase(`/posts/${slug}/`)} frontmatter={data} />
         ))
       }
     </ul>
@@ -39,10 +40,10 @@ const { currentPage, totalPages, paginatedPosts, tag, tagName } = Astro.props;
   <Pagination
     {currentPage}
     {totalPages}
-    prevUrl={`/tags/${tag}${
-      currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""
-    }/`}
-    nextUrl={`/tags/${tag}/${currentPage + 1}/`}
+    prevUrl={withBase(
+      `/tags/${tag}${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`
+    )}
+    nextUrl={withBase(`/tags/${tag}/${currentPage + 1}/`)}
   />
 
   <Footer noMarginTop={totalPages > 1} />

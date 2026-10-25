@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@utils/withBase";
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
@@ -64,7 +65,9 @@ const facts = [
         </p>
         <div class="hero-ctas">
           <a href="#guides" class="btn-primary">Find your guide</a>
-          <a href="/dark-sky-reserve/" class="btn-ghost">Explore the reserve</a>
+          <a href={withBase("/dark-sky-reserve/")} class="btn-ghost"
+            >Explore the reserve</a
+          >
         </div>
       </div>
       <Mountains />
@@ -78,7 +81,9 @@ const facts = [
       <div class="container-wide intro-grid">
         <div>
           <p class="eyebrow">Look up</p>
-          <h2 class="section-title">Your journey through the cosmos starts here</h2>
+          <h2 class="section-title">
+            Your journey through the cosmos starts here
+          </h2>
         </div>
         <p class="lead">
           Look up and explore the wonders of the universe with your personal
@@ -118,15 +123,25 @@ const facts = [
             to you or the one who speaks your language.
           </p>
         </div>
-        <a href="/guides/" class="btn-ghost hidden sm:inline-flex">All guides</a>
+        <a href={withBase("/guides/")} class="btn-ghost hidden sm:inline-flex"
+          >All guides</a
+        >
       </div>
 
       <div class="guide-scroller" tabindex="0" aria-label="Guides">
-        {guides.map(guide => <div class="guide-slide"><GuideCard guide={guide} /></div>)}
+        {
+          guides.map(guide => (
+            <div class="guide-slide">
+              <GuideCard guide={guide} />
+            </div>
+          ))
+        }
       </div>
 
       <div class="container-wide mt-6 sm:hidden">
-        <a href="/guides/" class="btn-ghost w-full">See all guides</a>
+        <a href={withBase("/guides/")} class="btn-ghost w-full"
+          >See all guides</a
+        >
       </div>
 
       <div class="container-wide mt-14">
@@ -144,9 +159,9 @@ const facts = [
           <h2 class="section-title">Kerry International Dark Sky Reserve</h2>
           <p class="mt-6 leading-relaxed text-white/80">
             Located along Ireland’s stunning Wild Atlantic Way, the Kerry
-            International Dark Sky Reserve is the only Gold Tier dark sky reserve
-            in the Northern Hemisphere and offers some of the darkest and most
-            spectacular night skies in the world.
+            International Dark Sky Reserve is the only Gold Tier dark sky
+            reserve in the Northern Hemisphere and offers some of the darkest
+            and most spectacular night skies in the world.
           </p>
           <p class="mt-4 leading-relaxed text-white/80">
             Far from the glow of city lights, visitors can admire countless
@@ -154,7 +169,7 @@ const facts = [
             across the sky. It’s a magical destination for stargazers, nature
             lovers, and anyone wishing to discover the wonders of the universe.
           </p>
-          <a href="/dark-sky-reserve/" class="btn-primary mt-8">
+          <a href={withBase("/dark-sky-reserve/")} class="btn-primary mt-8">
             About the reserve
           </a>
         </div>
@@ -185,12 +200,18 @@ const facts = [
           <li>
             <span>02</span>
             <h3>Get in touch</h3>
-            <p>Contact your guide directly to plan the date, group and meeting point.</p>
+            <p>
+              Contact your guide directly to plan the date, group and meeting
+              point.
+            </p>
           </li>
           <li>
             <span>03</span>
             <h3>Look up</h3>
-            <p>Dress warm, bring curiosity — your guide brings the stories and the stars.</p>
+            <p>
+              Dress warm, bring curiosity — your guide brings the stories and
+              the stars.
+            </p>
           </li>
         </ol>
       </div>
@@ -205,17 +226,26 @@ const facts = [
               <p class="eyebrow">News</p>
               <h2 class="section-title">Latest from the dark side</h2>
             </div>
-            <a href="/posts/" class="btn-ghost hidden sm:inline-flex">
+            <a
+              href={withBase("/posts/")}
+              class="btn-ghost hidden sm:inline-flex"
+            >
               All news
             </a>
           </div>
           <ul class="container-wide news-grid">
             {posts.map(({ data, slug }) => (
-              <Card href={`/posts/${slug}/`} frontmatter={data} secHeading={false} />
+              <Card
+                href={withBase(`/posts/${slug}/`)}
+                frontmatter={data}
+                secHeading={false}
+              />
             ))}
           </ul>
           <div class="container-wide mt-6 sm:hidden">
-            <a href="/posts/" class="btn-ghost w-full">All news</a>
+            <a href={withBase("/posts/")} class="btn-ghost w-full">
+              All news
+            </a>
           </div>
         </section>
       )
@@ -234,7 +264,8 @@ const facts = [
             </p>
           </div>
           <div class="cta-actions">
-            <a href="/membership/" class="btn-primary">Membership</a>
+            <a href={withBase("/membership/")} class="btn-primary">Membership</a
+            >
             <a href={`mailto:${CONTACT.email}`} class="btn-ghost">Email us</a>
           </div>
         </div>
@@ -395,9 +426,16 @@ const facts = [
   /* CTA */
   .cta {
     @apply relative flex flex-col gap-8 overflow-hidden p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between;
-    background:
-      radial-gradient(ellipse at 100% 0%, rgba(110, 231, 168, 0.18), transparent 60%),
-      radial-gradient(ellipse at 0% 100%, rgba(244, 199, 107, 0.12), transparent 60%),
+    background: radial-gradient(
+        ellipse at 100% 0%,
+        rgba(110, 231, 168, 0.18),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 0% 100%,
+        rgba(244, 199, 107, 0.12),
+        transparent 60%
+      ),
       rgba(255, 255, 255, 0.04);
   }
   .cta h2 {

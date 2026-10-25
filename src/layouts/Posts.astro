@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@utils/withBase";
 import type { CollectionEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
@@ -19,11 +20,14 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
 
 <Layout title={`News | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="News" pageDesc="Updates from Night Sky Guides Ireland — sky events, guides and the dark sky reserve.">
+  <Main
+    pageTitle="News"
+    pageDesc="Updates from Night Sky Guides Ireland — sky events, guides and the dark sky reserve."
+  >
     <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
+          <Card href={withBase(`/posts/${slug}/`)} frontmatter={data} />
         ))
       }
     </ul>
@@ -32,8 +36,10 @@ const { currentPage, totalPages, paginatedPosts } = Astro.props;
   <Pagination
     {currentPage}
     {totalPages}
-    prevUrl={`/posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
-    nextUrl={`/posts/${currentPage + 1}/`}
+    prevUrl={withBase(
+      `/posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`
+    )}
+    nextUrl={withBase(`/posts/${currentPage + 1}/`)}
   />
 
   <Footer noMarginTop={totalPages > 1} />

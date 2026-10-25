@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@utils/withBase";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -30,8 +31,8 @@ const { Content } = await post.render();
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
-  ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
-  Astro.url.origin
+  (ogImageUrl ?? `posts/${slugifyStr(title)}.png`).replace(/^\//, ""),
+  new URL(import.meta.env.BASE_URL.replace(/\/?$/, "/"), Astro.site)
 ).href;
 
 const layoutProps = {
@@ -56,7 +57,7 @@ const layoutProps = {
   <div class="mx-auto flex w-full max-w-3xl justify-start px-4">
     <button
       class="focus-outline mb-2 mt-8 flex items-center gap-1 text-white/70 hover:text-star"
-      onclick="(() => (history.length === 1) ? window.location = '/posts/' : history.back())()"
+      onclick={`(() => (history.length === 1) ? window.location = '${withBase("/posts/")}' : history.back())()`}
     >
       <svg xmlns="http://www.w3.org/2000/svg"
         ><path

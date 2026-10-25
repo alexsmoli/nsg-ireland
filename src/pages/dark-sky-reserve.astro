@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@utils/withBase";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -25,10 +26,22 @@ const highlights = [
 ];
 
 const tips = [
-  ["Check the moon", "The darkest skies are around new moon. A bright moon hides fainter stars and the Milky Way."],
-  ["Give your eyes time", "It takes 20–30 minutes for your eyes to adapt to the dark. Avoid white light — use a red torch."],
-  ["Dress for the Atlantic", "Even in summer, nights get cold. Warm layers, a hat and waterproofs make all the difference."],
-  ["Watch the weather", "Kerry weather changes fast. Your guide knows where to find a gap in the clouds."],
+  [
+    "Check the moon",
+    "The darkest skies are around new moon. A bright moon hides fainter stars and the Milky Way.",
+  ],
+  [
+    "Give your eyes time",
+    "It takes 20–30 minutes for your eyes to adapt to the dark. Avoid white light — use a red torch.",
+  ],
+  [
+    "Dress for the Atlantic",
+    "Even in summer, nights get cold. Warm layers, a hat and waterproofs make all the difference.",
+  ],
+  [
+    "Watch the weather",
+    "Kerry weather changes fast. Your guide knows where to find a gap in the clouds.",
+  ],
 ];
 ---
 
@@ -44,7 +57,9 @@ const tips = [
       intro="Some of the darkest and most spectacular night skies in the world — right on Ireland’s Wild Atlantic Way."
     />
 
-    <section class="container-wide grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.3fr_1fr]">
+    <section
+      class="container-wide grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.3fr_1fr]"
+    >
       <div class="space-y-5 text-lg leading-relaxed text-white/80">
         <p>
           Located along Ireland’s stunning Wild Atlantic Way, the Kerry
@@ -104,8 +119,8 @@ const tips = [
         }
       </ol>
       <div class="mt-12 flex flex-col gap-3 sm:flex-row">
-        <a href="/guides/" class="btn-primary">Find a guide</a>
-        <a href="/contact/" class="btn-ghost">Ask us a question</a>
+        <a href={withBase("/guides/")} class="btn-primary">Find a guide</a>
+        <a href={withBase("/contact/")} class="btn-ghost">Ask us a question</a>
       </div>
     </section>
   </main>
