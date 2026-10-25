@@ -23,4 +23,21 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const guides = defineCollection({
+  type: "content",
+  schema: z.object({
+    name: z.string(),
+    location: z.string(),
+    languages: z.array(z.string()).default(["English"]),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+    website: z.string().optional(),
+    photo: z.string().optional(),
+    lat: z.number(),
+    lng: z.number(),
+    order: z.number().default(100),
+    placeholder: z.boolean().optional(),
+  }),
+});
+
+export const collections = { blog, guides };

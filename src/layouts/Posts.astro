@@ -17,10 +17,10 @@ export interface Props {
 const { currentPage, totalPages, paginatedPosts } = Astro.props;
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
+<Layout title={`News | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
-    <ul>
+  <Main pageTitle="News" pageDesc="Updates from Night Sky Guides Ireland — sky events, guides and the dark sky reserve.">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         paginatedPosts.map(({ data, slug }) => (
           <Card href={`/posts/${slug}/`} frontmatter={data} />

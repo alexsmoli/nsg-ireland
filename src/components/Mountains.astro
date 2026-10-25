@@ -1,0 +1,48 @@
+---
+// Layered Kerry-style mountain silhouette with a stargazer and telescope.
+export interface Props {
+  class?: string;
+  stargazer?: boolean;
+}
+
+const { class: className = "", stargazer = true } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1440 320"
+  preserveAspectRatio="xMidYMax slice"
+  class:list={["mountains", className]}
+  aria-hidden="true"
+>
+  <path
+    fill="#0f2a2c"
+    d="M0 210 L90 170 L170 190 L260 120 L330 150 L420 95 L520 160 L600 130 L690 175 L780 110 L860 140 L960 80 L1050 135 L1140 115 L1230 160 L1330 120 L1440 150 L1440 320 L0 320Z"
+  ></path>
+  <path
+    fill="#0a1f20"
+    d="M0 250 L120 205 L230 235 L340 185 L450 225 L560 200 L700 245 L820 205 L930 230 L1040 190 L1160 235 L1280 205 L1440 240 L1440 320 L0 320Z"
+  ></path>
+  <path
+    fill="#050d0f"
+    d="M0 290 C180 255 300 270 430 280 C560 290 640 262 760 258 C880 254 980 275 1080 270 C1200 264 1320 250 1440 262 L1440 320 L0 320Z"
+  ></path>
+  {
+    stargazer && (
+      <g fill="#050d0f" transform="translate(1040 214)">
+        <circle cx="20" cy="4" r="7" />
+        <path d="M13 12 h14 l4 30 l-5 1 l-3 -14 l-2 26 h-6 l-1 -26 l-3 14 l-5 -1 z" />
+        <path d="M26 16 l18 -6 l2 4 l-18 7 z" />
+        <path d="M44 4 l26 -18 l4 6 l-26 18 z" />
+        <path d="M50 12 l-8 46 h3 l7 -38 l8 38 h3 l-10 -46 z" />
+      </g>
+    )
+  }
+</svg>
+
+<style>
+  .mountains {
+    @apply pointer-events-none absolute bottom-0 left-0 h-auto w-full;
+    min-height: 110px;
+  }
+</style>

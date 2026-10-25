@@ -1,0 +1,116 @@
+---
+import type { CollectionEntry } from "astro:content";
+import "leaflet/dist/leaflet.css";
+
+export interface Props {
+  guides: CollectionEntry<"guides">[];
+  linkBase?: string;
+}
+
+const { guides, linkBase = "/guides/" } = Astro.props;
+
+const pins = guides.map(({ slug, data }) => ({
+  slug,
+  name: data.name,
+  location: data.location,
+  lat: data.lat,
+  lng: data.lng,
+}));
+---
+
+<div class="map-wrap card-glass">
+  <div class="guide-map" data-pins={JSON.stringify(pins)} data-link-base={linkBase}>
+  </div>
+</div>
+
+<style>
+  .map-wrap {
+    @apply overflow-hidden p-1.5;
+  }
+  .guide-map {
+    @apply h-[420px] w-full rounded-[1.25rem] sm:h-[520px];
+    background: #0c1c26;
+  }
+  .guide-map :global(.night-tiles) {
+    filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.6);
+  }
+  .guide-map :global(.leaflet-popup-content-wrapper),
+  .guide-map :global(.leaflet-popup-tip) {
+    @apply bg-night-800 text-white;
+  }
+  .guide-map :global(.leaflet-popup-content) {
+    @apply font-sans;
+  }
+  .guide-map :global(.leaflet-popup-content a) {
+    @apply font-semibold text-star;
+  }
+  .guide-map :global(.star-pin) {
+    @apply flex items-center justify-center;
+  }
+  .guide-map :global(.star-pin span) {
+    @apply block h-4 w-4 rounded-full border-2 border-white bg-star;
+    box-shadow:
+      0 0 0 6px rgba(244, 199, 107, 0.25),
+      0 0 18px rgba(244, 199, 107, 0.8);
+  }
+  .guide-map :global(.leaflet-control-attribution) {
+    @apply bg-night-900/80 text-white/60;
+  }
+  .guide-map :global(.leaflet-control-attribution a) {
+    @apply text-white/80;
+  }
+  .guide-map :global(svg) {
+    @apply h-auto w-auto;
+  }
+</style>
+
+<script>
+  import L from "leaflet";
+
+  type Pin = { slug: string; name: string; location: string; lat: number; lng: number };
+
+  document.querySelectorAll<HTMLElement>(".guide-map").forEach(el => {
+    const pins: Pin[] = JSON.parse(el.dataset.pins ?? "[]");
+    const linkBase = el.dataset.linkBase ?? "/guides/";
+    const map = L.map(el, {
+      scrollWheelZoom: false,
+      dragging: !L.Browser.mobile,
+      tap: false,
+    } as L.MapOptions);
+
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+      className: "night-tiles",
+    }).addTo(map);
+
+    const icon = L.divIcon({ className: "star-pin", html: "<span></span>", iconSize: [24, 24] });
+    const markers = pins.map(pin =>
+      L.marker([pin.lat, pin.lng], { icon, title: pin.name })
+        .bindPopup(
+          `<strong>${pin.name}</strong><br>${pin.location}<br><a href="${linkBase}#${pin.slug}">View guide →</a>`
+        )
+        .addTo(map)
+    );
+
+    const fit = () => {
+      map.invalidateSize();
+      if (markers.length) {
+        map.fitBounds(L.featureGroup(markers).getBounds(), { padding: [30, 30] });
+      } else {
+        map.setView([51.9, -10.0], 9);
+      }
+    };
+    fit();
+    // Re-fit once the container has its final size (fonts/CSS may load late)
+    let fitted = false;
+    new ResizeObserver(() => {
+      if (!fitted) {
+        fitted = true;
+        fit();
+      }
+    }).observe(el);
+    window.addEventListener("load", fit, { once: true });
+  });
+</script>

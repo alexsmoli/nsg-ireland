@@ -1,0 +1,106 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import PageHero from "@components/PageHero.astro";
+import Socials from "@components/Socials.astro";
+import { CONTACT, SITE } from "@config";
+---
+
+<Layout title={`Contact | ${SITE.title}`}>
+  <Header activeNav="contact" transparent />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Contact"
+      title="Let’s look up together"
+      intro="Questions about a night out, the dark sky reserve or becoming a guide? We'd love to hear from you."
+    />
+
+    <section class="container-wide grid gap-8 py-16 sm:py-24 lg:grid-cols-[1fr_1.4fr]">
+      <div class="space-y-4">
+        <a href={`mailto:${CONTACT.email}`} class="contact-tile card-glass">
+          <span class="label">Email</span>
+          <span class="value">{CONTACT.email}</span>
+        </a>
+        {
+          CONTACT.phone && (
+            <a href={`tel:${CONTACT.phone}`} class="contact-tile card-glass">
+              <span class="label">Phone</span>
+              <span class="value">{CONTACT.phone}</span>
+            </a>
+          )
+        }
+        <div class="contact-tile card-glass">
+          <span class="label">Region</span>
+          <span class="value">{CONTACT.region}</span>
+        </div>
+        <a href="/guides/" class="contact-tile card-glass">
+          <span class="label">Book a night out</span>
+          <span class="value">Contact a guide directly →</span>
+        </a>
+        <Socials />
+      </div>
+
+      <form class="card-glass contact-form" id="contact-form">
+        <h2 class="text-2xl font-bold text-white">Send us a message</h2>
+        <label>
+          <span>Name</span>
+          <input name="name" required autocomplete="name" />
+        </label>
+        <label>
+          <span>Subject</span>
+          <select name="subject">
+            <option>Stargazing with a guide</option>
+            <option>Kerry Dark Sky Reserve</option>
+            <option>Membership</option>
+            <option>Something else</option>
+          </select>
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="btn-primary w-full sm:w-fit">
+          Open in email app
+        </button>
+        <p class="text-xs text-white/50">
+          This opens your email app with the message ready to send.
+        </p>
+      </form>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .contact-tile {
+    @apply flex flex-col p-5 transition hover:border-aurora/40;
+  }
+  .label {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-white/50;
+  }
+  .value {
+    @apply mt-1 break-words font-display text-lg font-semibold text-white;
+  }
+  .contact-form {
+    @apply flex flex-col gap-5 p-6 sm:p-8;
+  }
+  .contact-form label {
+    @apply flex flex-col gap-2 text-sm font-medium text-white/80;
+  }
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    @apply w-full rounded-2xl border border-white/15 bg-night-950/60 px-4 py-3 text-base text-white outline-none transition focus:border-star;
+  }
+</style>
+
+<script define:vars={{ email: CONTACT.email }}>
+  document.getElementById("contact-form")?.addEventListener("submit", e => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const subject = encodeURIComponent(`${data.get("subject")} – ${data.get("name")}`);
+    const body = encodeURIComponent(`${data.get("message")}\n\n${data.get("name")}`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  });
+</script>

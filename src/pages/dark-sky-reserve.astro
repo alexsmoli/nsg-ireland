@@ -1,0 +1,137 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import PageHero from "@components/PageHero.astro";
+import { SITE } from "@config";
+
+const highlights = [
+  {
+    title: "Gold Tier skies",
+    text: "The highest rating for night sky quality — the Milky Way is clearly visible and casts its own faint glow.",
+  },
+  {
+    title: "Mountains meet the Atlantic",
+    text: "The reserve lies on the Iveragh Peninsula, sheltered by Kerry’s mountains on one side and the Atlantic Ocean on the other.",
+  },
+  {
+    title: "A living landscape",
+    text: "Ancient stone forts, ogham stones and coastal villages — the same sky has been watched here for thousands of years.",
+  },
+  {
+    title: "Dark by design",
+    text: "Local communities protect the darkness with sensible lighting, so the stars stay bright for people and wildlife.",
+  },
+];
+
+const tips = [
+  ["Check the moon", "The darkest skies are around new moon. A bright moon hides fainter stars and the Milky Way."],
+  ["Give your eyes time", "It takes 20–30 minutes for your eyes to adapt to the dark. Avoid white light — use a red torch."],
+  ["Dress for the Atlantic", "Even in summer, nights get cold. Warm layers, a hat and waterproofs make all the difference."],
+  ["Watch the weather", "Kerry weather changes fast. Your guide knows where to find a gap in the clouds."],
+];
+---
+
+<Layout
+  title={`Kerry International Dark Sky Reserve | ${SITE.title}`}
+  description="The Kerry International Dark Sky Reserve on Ireland’s Wild Atlantic Way offers some of the darkest night skies in the world."
+>
+  <Header activeNav="reserve" transparent />
+  <main id="main-content">
+    <PageHero
+      eyebrow="Gold Tier · Wild Atlantic Way"
+      title="Kerry International Dark Sky Reserve"
+      intro="Some of the darkest and most spectacular night skies in the world — right on Ireland’s Wild Atlantic Way."
+    />
+
+    <section class="container-wide grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.3fr_1fr]">
+      <div class="space-y-5 text-lg leading-relaxed text-white/80">
+        <p>
+          Located along Ireland’s stunning Wild Atlantic Way, the Kerry
+          International Dark Sky Reserve is the only Gold Tier dark sky reserve
+          in the Northern Hemisphere and offers some of the darkest and most
+          spectacular night skies in the world.
+        </p>
+        <p>
+          Far from the glow of city lights, visitors can admire countless stars,
+          spot constellations, and experience the Milky Way stretching across
+          the sky. It’s a magical destination for stargazers, nature lovers, and
+          anyone wishing to discover the wonders of the universe.
+        </p>
+      </div>
+      <aside class="card-glass p-6 sm:p-8">
+        <p class="eyebrow">At a glance</p>
+        <dl class="mt-5 space-y-4">
+          <div><dt>Where</dt><dd>Iveragh Peninsula, Co. Kerry</dd></div>
+          <div><dt>Designated</dt><dd>2014 by DarkSky International</dd></div>
+          <div><dt>Rating</dt><dd>Gold Tier</dd></div>
+          <div><dt>Size</dt><dd>approx. 700 km²</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="bg-[#050d0f] py-16 sm:py-24">
+      <div class="container-wide">
+        <p class="eyebrow">Why it’s special</p>
+        <h2 class="section-title">A sky like our ancestors saw it</h2>
+        <ul class="mt-10 grid gap-4 sm:grid-cols-2">
+          {
+            highlights.map(item => (
+              <li class="card-glass p-6">
+                <h3 class="text-xl font-bold text-white">{item.title}</h3>
+                <p class="mt-2 text-white/70">{item.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="container-wide py-16 sm:py-24">
+      <p class="eyebrow">Before you go</p>
+      <h2 class="section-title">Stargazing tips</h2>
+      <ol class="tips">
+        {
+          tips.map(([title, text], i) => (
+            <li>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-12 flex flex-col gap-3 sm:flex-row">
+        <a href="/guides/" class="btn-primary">Find a guide</a>
+        <a href="/contact/" class="btn-ghost">Ask us a question</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  dt {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-white/50;
+  }
+  dd {
+    @apply mt-0.5 font-display text-lg font-semibold text-white;
+  }
+  .tips {
+    @apply mt-10 grid gap-6 sm:grid-cols-2;
+  }
+  .tips li {
+    @apply flex gap-4;
+  }
+  .tips span {
+    @apply font-display text-3xl font-extrabold text-star/80;
+  }
+  .tips h3 {
+    @apply text-lg font-bold text-white;
+  }
+  .tips p {
+    @apply mt-1 text-white/70;
+  }
+</style>
