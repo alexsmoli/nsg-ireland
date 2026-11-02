@@ -7,8 +7,8 @@ languages:
 email: jphpierre@hotmail.com
 phone: +353 (0)86 199 27 60
 photo: /1516235147675 v2.jpg
-lat: 51.948
-lng: -10.222
+lat: 52.446
+lng: -9.4854
 order: 1
 placeholder: true
 ---
