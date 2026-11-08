@@ -1,158 +1,152 @@
-# AstroPaper 📄
-
-![AstroPaper](public/astropaper-og.jpg)
-![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![GitHub](https://img.shields.io/github/license/satnaing/astro-paper?color=%232F3741&style=for-the-badge)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white&style=for-the-badge)](https://conventionalcommits.org)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge)](http://commitizen.github.io/cz-cli/)
-
-AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro blog theme. This theme is designed and crafted based on [my personal blog](https://satnaing.dev/blog).
-
-This theme follows best practices and provides accessibility out of the box. Light and dark mode are supported by default. Moreover, additional color schemes can also be configured.
-
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README Documentation Section](#-documentation) for more info.
-
-## 🔥 Features
-
-- [x] type-safe markdown
-- [x] super fast performance
-- [x] accessible (Keyboard/VoiceOver)
-- [x] responsive (mobile ~ desktops)
-- [x] SEO-friendly
-- [x] light & dark mode
-- [x] fuzzy search
-- [x] draft posts & pagination
-- [x] sitemap & rss feed
-- [x] followed best practices
-- [x] highly customizable
-- [x] dynamic OG image generation for blog posts [#15](https://github.com/satnaing/astro-paper/pull/15) ([Blog Post](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/))
-
-_Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver** on Mac and **TalkBack** on Android. I couldn't test all other screen-readers out there. However, accessibility enhancements in AstroPaper should be working fine on others as well._
-
-## ✅ Lighthouse Score
-
 <p align="center">
-  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fastro-paper.pages.dev%2F&form_factor=desktop">
-    <img width="710" alt="AstroPaper Lighthouse Score" src="AstroPaper-lighthouse-score.svg">
-  <a>
+  <img src="public/favicon.svg" width="72" height="72" alt="Night Sky Guides Ireland logo" />
 </p>
 
-## 🚀 Project Structure
+<h1 align="center">Night Sky Guides Ireland</h1>
 
-Inside of AstroPaper, you'll see the following folders and files:
+<p align="center">
+  <strong>Discover the wonders of the night sky with a local guide in the Kerry International Dark Sky Reserve.</strong><br />
+  <a href="https://alexsmoli.github.io/nsg-ireland/">alexsmoli.github.io/nsg-ireland</a>
+</p>
 
-```bash
-/
-├── public/
-│   ├── assets/
-│   │   └── logo.svg
-│   │   └── logo.png
-│   └── favicon.svg
-│   └── astropaper-og.jpg
-│   └── robots.txt
-│   └── toggle-theme.js
-├── src/
-│   ├── assets/
-│   │   └── socialIcons.ts
-│   ├── components/
-│   ├── content/
-│   │   |  blog/
-│   │   |    └── some-blog-posts.md
-│   │   └── config.ts
-│   ├── layouts/
-│   └── pages/
-│   └── styles/
-│   └── utils/
-│   └── config.ts
-│   └── types.ts
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-All blog posts are stored in `src/content/blog` directory.
-
-## 📖 Documentation
-
-Documentation can be read in two formats\_ _markdown_ & _blog post_.
-
-- Configuration - [markdown](src/content/blog/how-to-configure-astropaper-theme.md) | [blog post](https://astro-paper.pages.dev/posts/how-to-configure-astropaper-theme/)
-- Add Posts - [markdown](src/content/blog/adding-new-post.md) | [blog post](https://astro-paper.pages.dev/posts/adding-new-posts-in-astropaper-theme/)
-- Customize Color Schemes - [markdown](src/content/blog/customizing-astropaper-theme-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/)
-- Predefined Color Schemes - [markdown](src/content/blog/predefined-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/predefined-color-schemes/)
-
-> For AstroPaper v1, check out [this branch](https://github.com/satnaing/astro-paper/tree/astro-paper-v1) and this [live URL](https://astro-paper-v1.astro-paper.pages.dev/)
-
-## 💻 Tech Stack
-
-**Main Framework** - [Astro](https://astro.build/)  
-**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
-**Component Framework** - [ReactJS](https://reactjs.org/)  
-**Styling** - [TailwindCSS](https://tailwindcss.com/)  
-**UI/UX** - [Figma](https://figma.com)  
-**Fuzzy Search** - [FuseJS](https://fusejs.io/)  
-**Icons** - [Boxicons](https://boxicons.com/) | [Tablers](https://tabler-icons.io/)  
-**Code Formatting** - [Prettier](https://prettier.io/)  
-**Deployment** - [Cloudflare Pages](https://pages.cloudflare.com/)  
-**Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
-**Linting** - [ESLint](https://eslint.org)
-
-## 👨🏻‍💻 Running Locally
-
-The easiest way to run this project locally is to run the following command in your desired directory.
-
-```bash
-# npm 6.x
-npm create astro@latest --template satnaing/astro-paper
-
-# npm 7+, extra double-dash is needed:
-npm create astro@latest -- --template satnaing/astro-paper
-
-# yarn
-yarn create astro --template satnaing/astro-paper
-```
-
-## Google Site Verification (optional)
-
-You can easily add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) in AstroPaper using environment variable. This step is optional. If you don't add the following env variable, the google-site-verification tag won't appear in the html `<head>` section.
-
-```bash
-# in your environment variable file (.env)
-PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
-```
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-> **_Note!_** For `Docker` commands we must have it [installed](https://docs.docker.com/engine/install/) in your machine.
-
-| Command                              | Action                                                                                                                           |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `npm install`                        | Installs dependencies                                                                                                            |
-| `npm run dev`                        | Starts local dev server at `localhost:4321`                                                                                      |
-| `npm run build`                      | Build your production site to `./dist/`                                                                                          |
-| `npm run preview`                    | Preview your build locally, before deploying                                                                                     |
-| `npm run format:check`               | Check code format with Prettier                                                                                                  |
-| `npm run format`                     | Format codes with Prettier                                                                                                       |
-| `npm run sync`                       | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
-| `npm run cz`                         | Commit code changes with commitizen                                                                                              |
-| `npm run lint`                       | Lint with ESLint                                                                                                                 |
-| `docker compose up -d`               | Run AstroPaper on docker, You can access with the same hostname and port informed on `dev` command.                              |
-| `docker compose run app npm install` | You can run any command above into the docker container.                                                                         |
-
-> **_Warning!_** Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
-
-## ✨ Feedback & Suggestions
-
-If you have any suggestions/feedback, you can contact me via [my email](mailto:contact@satnaing.dev). Alternatively, feel free to open an issue if you find bugs or want to request new features.
-
-## 📜 License
-
-Licensed under the MIT License, Copyright © 2023
+<p align="center">
+  <img src="docs/screenshots/home-desktop.jpg" alt="Homepage on desktop: animated starfield, NSG Ireland logo and the headline “Discover the Wonders of the Night Sky” above a Kerry mountain silhouette" width="72%" />
+  &nbsp;
+  <img src="docs/screenshots/home-mobile.jpg" alt="The same homepage on a phone, with full-width buttons" width="22%" />
+</p>
 
 ---
 
-Made with 🤍 by [Sat Naing](https://satnaing.dev) 👨🏻‍💻 and [contributors](https://github.com/satnaing/astro-paper/graphs/contributors).
+## About the website
+
+This is the website of **Night Sky Guides Ireland (NSG Ireland)**, a network of trained local
+guides who take visitors stargazing in the Kerry International Dark Sky Reserve on Ireland's
+Wild Atlantic Way.
+
+The site helps visitors to
+
+- **find a guide** near them or one who speaks their language, and contact them directly,
+- **learn about the Kerry International Dark Sky Reserve** and how to prepare for a night out,
+- **follow news** about sky events and the guides,
+- **become a member** if they are a trained Night Sky Guide themselves.
+
+### Pages
+
+| Page                 | What's on it                                                                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Home**             | Hero with animated night sky, intro, what you'll see, guide carousel and map, the reserve at a glance, “Three steps to the stars”, latest news, membership call-to-action |
+| **About Us**         | The story and mission of NSG Ireland, plus a preview of the guides (“Who we are”)                                                                                         |
+| **Our Guides**       | All guides with photo, location, languages and contact buttons, a language filter and a map with a pin per guide                                                          |
+| **Dark Sky Reserve** | About the Gold Tier reserve, key facts, why it's special, stargazing tips                                                                                                 |
+| **News**             | Blog-style posts about sky events, guides and the reserve                                                                                                                 |
+| **Membership**       | What membership offers and how to register interest                                                                                                                       |
+| **Contact**          | Email, region and a contact form that opens the visitor's email app                                                                                                       |
+
+<p align="center">
+  <img src="docs/screenshots/guides-desktop.jpg" alt="Guide section: guide cards with photo or silhouette, location, language tags and contact buttons, with carousel arrows" width="90%" />
+</p>
+
+### Design
+
+- **Mobile first.** Built for phones first, with a full-screen menu, large tap targets (≥ 44 px), swipeable guide cards and a map you tap to activate so it doesn't catch your scrolling.
+- **Night-sky look.** A twinkling starfield with the Milky Way and the odd shooting star, a layered Kerry mountain silhouette, deep night blues, the green from the NSG logo and warm starlight gold for buttons.
+- **Accessible.** Checked against WCAG 2.1 AA: colour contrast, a visible focus ring everywhere, keyboard-usable filter and map, screen-reader labels and support for “reduce motion”.
+- **Fonts:** [Outfit](https://fonts.google.com/specimen/Outfit) for headings, [Inter](https://fonts.google.com/specimen/Inter) for body text.
+
+---
+
+## Editing content (no coding needed)
+
+All texts, guides and news posts can be edited in the browser with **[Pages CMS](https://app.pagescms.org)**.
+Sign in with GitHub, open the `nsg-ireland` repository, and you'll see:
+
+| Section in Pages CMS  | Edits                                                                        |
+| --------------------- | ---------------------------------------------------------------------------- |
+| Home page             | All texts on the homepage (hero, intro, tiles, facts, steps, call-to-action) |
+| About page            | The About Us text                                                            |
+| Guides page           | Title, intro and filter labels of the guides page                            |
+| Dark Sky Reserve page | Reserve text, facts, highlights and tips                                     |
+| Membership page       | Benefits and the membership box                                              |
+| Contact page          | Contact page texts and form labels                                           |
+| Site settings         | Email, phone, region, social links, footer text                              |
+| **Guides**            | One entry per guide                                                          |
+| **News**              | One entry per post                                                           |
+
+Saving in Pages CMS commits to `main`, and the live site updates automatically after about two minutes.
+
+### Adding or updating a guide
+
+Each guide has these fields:
+
+| Field                   | Notes                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| Name, Location          | Shown on the card, e.g. “Waterville, Co. Kerry”                                       |
+| Languages               | One entry per language; these also feed the language filter                           |
+| Email / Phone / Website | Each one adds a button to the card when filled in                                     |
+| Photo                   | Upload a portrait (ideally landscape 4:3); without one, a silhouette is shown         |
+| Latitude / Longitude    | Position of the map pin. Right-click the place in Google Maps to copy the coordinates |
+| Sort order              | Lower numbers appear first                                                            |
+| Short bio               | A few sentences shown on the guides page                                              |
+
+---
+
+## Development
+
+Requires Node.js 20 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+The site then runs at <http://localhost:4321/nsg-ireland/>.
+
+| Command           | Does                                         |
+| ----------------- | -------------------------------------------- |
+| `npm run dev`     | Starts the local dev server with live reload |
+| `npm run build`   | Builds the production site into `dist/`      |
+| `npm run preview` | Serves the built site locally                |
+| `npm run format`  | Formats the code with Prettier               |
+| `npx astro check` | Type-checks the project                      |
+
+### Project structure
+
+```text
+src/
+├── components/     UI pieces: Header, Footer, Logo, Starfield, Mountains, GuideCard, GuideMap, …
+├── content/
+│   ├── blog/       News posts (Markdown)
+│   └── guides/     One Markdown file per guide
+├── data/           Page texts as JSON, edited via Pages CMS
+├── layouts/        Page layouts (base layout, About, news posts)
+├── pages/          One file per route (index, guides, dark-sky-reserve, contact, …)
+├── styles/         Global styles and design tokens
+└── config.ts       Site title, URL and navigation
+public/assets/      Logo and uploaded images (guide photos in public/assets/guides/)
+.pages.yml          Pages CMS configuration
+```
+
+### Deployment
+
+Every push to `main` is built and published to **GitHub Pages** by
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+
+The site currently lives under the `/nsg-ireland/` path. Internal links therefore go through the
+`withBase()` helper in `src/utils/withBase.ts`. To move to a custom domain:
+
+1. Set up the domain under **Settings → Pages** in GitHub.
+2. Change `website` in `src/config.ts` to the new domain.
+3. Remove `base: "/nsg-ireland"` from `astro.config.ts`.
+
+### Tech stack
+
+[Astro](https://astro.build) · [Tailwind CSS](https://tailwindcss.com) ·
+[Leaflet](https://leafletjs.com) with [OpenStreetMap](https://www.openstreetmap.org) tiles ·
+[Pages CMS](https://pagescms.org) · GitHub Pages
+
+---
+
+## Credits
+
+Built on the [AstroPaper](https://github.com/satnaing/astro-paper) theme by Sat Naing (MIT licence),
+heavily redesigned for NSG Ireland. Map data © OpenStreetMap contributors.

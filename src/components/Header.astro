@@ -100,7 +100,7 @@ const { activeNav, transparent = false } = Astro.props;
     @apply flex h-16 items-center justify-between gap-4 lg:h-20;
   }
   .brand {
-    @apply flex items-center gap-3 text-white;
+    @apply flex min-h-[48px] items-center gap-3 rounded-xl text-white;
   }
   .brand :global(.brand-mark) {
     @apply h-9 w-auto text-aurora lg:h-11;

@@ -43,10 +43,11 @@ const dipperPath =
   xmlns="http://www.w3.org/2000/svg"
   viewBox={mark ? "0 10 365 170" : "0 10 365 340"}
   class:list={["logo-svg", className]}
-  role="img"
-  aria-label={title}
+  role={title ? "img" : undefined}
+  aria-label={title || undefined}
+  aria-hidden={title ? undefined : "true"}
 >
-  <title>{title}</title>
+  {title && <title>{title}</title>}
   <defs>
     <mask id={maskId}>
       <rect x="0" y="0" width="200" height="200" fill="white"></rect>

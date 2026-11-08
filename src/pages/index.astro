@@ -92,20 +92,26 @@ const guidesText = home.guides;
             {guidesText.intro.replace("{count}", String(guides.length))}
           </p>
         </div>
-        <a href={withBase("/guides/")} class="btn-ghost hidden sm:inline-flex"
-          >{guidesText.button}</a
-        >
+        <div class="hidden items-center gap-3 sm:flex">
+          <button type="button" class="scroll-btn" data-scroll="-1" aria-label="Previous guides">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <button type="button" class="scroll-btn" data-scroll="1" aria-label="Next guides">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
+          <a href={withBase("/guides/")} class="btn-ghost ml-2">{guidesText.button}</a>
+        </div>
       </div>
 
-      <div class="guide-scroller" tabindex="0" aria-label="Guides">
+      <ul class="guide-scroller" id="guide-scroller" tabindex="0" aria-label="Guides">
         {
           guides.map(guide => (
-            <div class="guide-slide">
+            <li class="guide-slide">
               <GuideCard guide={guide} />
-            </div>
+            </li>
           ))
         }
-      </div>
+      </ul>
 
       <div class="container-wide mt-6 sm:hidden">
         <a href={withBase("/guides/")} class="btn-ghost w-full"
@@ -122,6 +128,7 @@ const guidesText = home.guides;
     <!-- Reserve -->
     <section id="reserve" class="section reserve">
       <Starfield density={0.6} milkyWay={false} />
+      <div class="horizon-divider" aria-hidden="true"></div>
       <div class="container-wide reserve-grid">
         <div>
           <p class="eyebrow">{reserve.eyebrow}</p>
@@ -149,6 +156,7 @@ const guidesText = home.guides;
 
     <!-- How it works -->
     <section class="section steps-section">
+      <div class="horizon-divider" aria-hidden="true"></div>
       <div class="container-wide">
         <p class="eyebrow">{steps.eyebrow}</p>
         <h2 class="section-title">{steps.title}</h2>
@@ -156,9 +164,11 @@ const guidesText = home.guides;
           {
             steps.items.map((step, i) => (
               <li>
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
+                <span class="step-num" aria-hidden="true">{i + 1}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                </div>
               </li>
             ))
           }
@@ -287,7 +297,7 @@ const guidesText = home.guides;
     @apply grid gap-8 lg:grid-cols-2 lg:items-end;
   }
   .lead {
-    @apply text-lg leading-relaxed text-white/80;
+    @apply text-[1.0625rem] leading-relaxed text-white/80 sm:text-lg;
   }
   .experiences {
     @apply mt-10 grid gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4;
@@ -314,8 +324,11 @@ const guidesText = home.guides;
   }
   .guide-scroller {
     @apply flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:px-6;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     scroll-padding-inline: 1rem;
+  }
+  .guide-scroller::-webkit-scrollbar {
+    display: none;
   }
   @media (min-width: 1200px) {
     .guide-scroller {
@@ -325,6 +338,15 @@ const guidesText = home.guides;
   }
   .guide-slide {
     @apply w-[78%] max-w-[300px] shrink-0 snap-start sm:w-[300px];
+  }
+  .scroll-btn {
+    @apply flex h-12 w-12 items-center justify-center rounded-full border border-white/40 text-white transition hover:border-aurora hover:text-aurora disabled:opacity-30;
+  }
+  .scroll-btn svg {
+    @apply h-5 w-5 fill-none stroke-current;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
   .map-title {
     @apply mb-5 text-2xl font-bold text-white;
@@ -355,19 +377,37 @@ const guidesText = home.guides;
     @apply bg-[#050d0f];
   }
   .steps {
-    @apply mt-12 grid gap-8 sm:grid-cols-3;
+    @apply relative mt-12 grid gap-8 sm:grid-cols-3 sm:gap-6;
+  }
+  /* Dotted "constellation" line linking the steps */
+  .steps::before {
+    content: "";
+    @apply absolute bottom-6 left-6 top-6 w-px sm:bottom-auto sm:left-6 sm:right-6 sm:top-6 sm:h-px sm:w-auto;
+    background-image: linear-gradient(
+      var(--dir, 180deg),
+      rgba(244, 199, 107, 0.6) 40%,
+      transparent 0
+    );
+    background-size: 1px 10px;
+  }
+  @media (min-width: 640px) {
+    .steps::before {
+      --dir: 90deg;
+      background-size: 10px 1px;
+    }
   }
   .steps li {
-    @apply relative border-t border-white/15 pt-6;
+    @apply relative flex gap-5 sm:block;
   }
-  .steps span {
-    @apply font-display text-sm font-bold tracking-widest text-aurora;
+  .step-num {
+    @apply relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-star bg-night-950 font-display text-lg font-bold text-star;
+    box-shadow: 0 0 24px rgba(244, 199, 107, 0.35);
   }
   .steps h3 {
-    @apply mt-2 text-2xl font-bold text-white;
+    @apply text-xl font-bold text-white sm:mt-5 sm:text-2xl;
   }
   .steps p {
-    @apply mt-2 text-white/70;
+    @apply mt-2 text-white/75;
   }
 
   /* News */
@@ -400,3 +440,23 @@ const guidesText = home.guides;
     @apply flex flex-col gap-3 sm:flex-row;
   }
 </style>
+
+<script>
+  const scroller = document.getElementById("guide-scroller");
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".scroll-btn");
+  const update = () => {
+    if (!scroller) return;
+    const max = scroller.scrollWidth - scroller.clientWidth - 4;
+    buttons.forEach(btn => {
+      btn.disabled = btn.dataset.scroll === "-1" ? scroller.scrollLeft <= 4 : scroller.scrollLeft >= max;
+    });
+  };
+  buttons.forEach(btn =>
+    btn.addEventListener("click", () => {
+      const dir = Number(btn.dataset.scroll);
+      scroller?.scrollBy({ left: dir * scroller.clientWidth * 0.8, behavior: "smooth" });
+    })
+  );
+  scroller?.addEventListener("scroll", update, { passive: true });
+  update();
+</script>
