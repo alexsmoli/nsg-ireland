@@ -2,7 +2,8 @@
 name: "Guide I"
 location: "Glenbeigh, Co. Kerry"
 languages: ["English"]
-email: "guidei@example.com"
+contact:
+  email: "guidei@example.com"
 lat: 52.057
 lng: -9.94
 order: 9

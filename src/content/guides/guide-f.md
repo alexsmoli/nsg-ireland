@@ -2,7 +2,8 @@
 name: "Guide F"
 location: "Caherdaniel, Co. Kerry"
 languages: ["English", "German"]
-email: "guidef@example.com"
+contact:
+  email: "guidef@example.com"
 lat: 51.765
 lng: -10.098
 order: 6

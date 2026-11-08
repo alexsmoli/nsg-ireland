@@ -2,7 +2,8 @@
 name: "Guide D"
 location: "Valentia Island, Co. Kerry"
 languages: ["English", "Irish"]
-email: "guided@example.com"
+contact:
+  email: "guided@example.com"
 lat: 51.908
 lng: -10.343
 order: 4

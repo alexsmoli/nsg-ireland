@@ -2,7 +2,8 @@
 name: "Guide L"
 location: "Castlecove, Co. Kerry"
 languages: ["English", "French"]
-email: "guidel@example.com"
+contact:
+  email: "guidel@example.com"
 lat: 51.776
 lng: -10.04
 order: 12

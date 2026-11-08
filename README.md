@@ -78,15 +78,15 @@ Saving in Pages CMS commits to `main`, and the live site updates automatically a
 
 Each guide has these fields:
 
-| Field                   | Notes                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------- |
-| Name, Location          | Shown on the card, e.g. “Waterville, Co. Kerry”                                       |
-| Languages               | One entry per language; these also feed the language filter                           |
-| Email / Phone / Website | Each one adds a button to the card when filled in                                     |
-| Photo                   | Upload a portrait (ideally landscape 4:3); without one, a silhouette is shown         |
-| Latitude / Longitude    | Position of the map pin. Right-click the place in Google Maps to copy the coordinates |
-| Sort order              | Lower numbers appear first                                                            |
-| Short bio               | A few sentences shown on the guides page                                              |
+| Field                                      | Notes                                                                                                                                              |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name, Location                             | Shown on the card, e.g. “Waterville, Co. Kerry”                                                                                                    |
+| Languages                                  | One entry per language; these also feed the language filter                                                                                        |
+| Contact (Email, Phone, Instagram, Website) | Each filled-in field shows as an icon button on the card. Instagram accepts `@handle` or a full link; the website works with or without `https://` |
+| Photo                                      | Upload a portrait (ideally landscape 4:3); without one, a silhouette is shown                                                                      |
+| Latitude / Longitude                       | Position of the map pin. Right-click the place in Google Maps to copy the coordinates                                                              |
+| Sort order                                 | Lower numbers appear first                                                                                                                         |
+| Short bio                                  | A few sentences shown on the guides page                                                                                                           |
 
 ---
 

@@ -2,7 +2,8 @@
 name: "Guide B"
 location: "Waterville, Co. Kerry"
 languages: ["English", "German"]
-email: "guideb@example.com"
+contact:
+  email: "guideb@example.com"
 lat: 51.829
 lng: -10.172
 order: 2
