@@ -25,7 +25,7 @@ const { noMarginTop = false } = Astro.props;
 
     <nav aria-label="Footer">
       <h2>Explore</h2>
-      <ul>
+      <ul class="grid grid-cols-2 gap-x-4 sm:block">
         {
           NAV_LINKS.map(link => (
             <li>
@@ -73,10 +73,10 @@ const { noMarginTop = false } = Astro.props;
     @apply mb-4 font-display text-sm font-semibold uppercase tracking-[0.2em] text-star;
   }
   ul {
-    @apply space-y-2 text-sm;
+    @apply text-sm sm:space-y-2;
   }
   ul a {
-    @apply text-white/80 transition hover:text-aurora;
+    @apply inline-flex min-h-[44px] items-center text-white/80 transition hover:text-aurora sm:min-h-0;
   }
   .footer-bottom {
     @apply mt-12 flex flex-col gap-2 border-t border-white/10 py-6 text-xs text-white/50 sm:flex-row sm:justify-between;

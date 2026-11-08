@@ -34,10 +34,10 @@ const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
       <div class="filter" role="group" aria-label="Filter by language">
         <span class="filter-label">{page.filterLabel}</span>
         <div class="chips">
-          <button class="chip is-active" data-lang="">{page.filterAll}</button>
+          <button class="chip is-active" data-lang="" aria-pressed="true">{page.filterAll}</button>
           {
             languages.map(lang => (
-              <button class="chip" data-lang={lang}>
+              <button class="chip" data-lang={lang} aria-pressed="false">
                 {lang}
               </button>
             ))
@@ -45,6 +45,7 @@ const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
         </div>
       </div>
 
+      <p class="sr-only" aria-live="polite" id="filter-status"></p>
       <ul class="guide-grid">
         {
           guides.map(guide => (
@@ -74,7 +75,7 @@ const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
     display: none;
   }
   .chip {
-    @apply min-h-[40px] shrink-0 rounded-full border border-white/20 px-4 text-sm text-white/80 transition hover:border-aurora;
+    @apply min-h-[44px] shrink-0 rounded-full border border-white/35 px-4 text-sm text-white/80 transition hover:border-aurora;
   }
   .chip.is-active {
     @apply border-star bg-star font-semibold text-night-950;
@@ -94,11 +95,18 @@ const languages = [...new Set(guides.flatMap(g => g.data.languages))].sort();
   chips.forEach(chip =>
     chip.addEventListener("click", () => {
       const lang = chip.dataset.lang ?? "";
-      chips.forEach(c => c.classList.toggle("is-active", c === chip));
+      chips.forEach(c => {
+        c.classList.toggle("is-active", c === chip);
+        c.setAttribute("aria-pressed", String(c === chip));
+      });
+      let shown = 0;
       items.forEach(item => {
         item.hidden =
           !!lang && !(item.dataset.langs ?? "").split("|").includes(lang);
+        if (!item.hidden) shown++;
       });
+      const status = document.getElementById("filter-status");
+      if (status) status.textContent = `${shown} guides shown`;
     })
   );
 </script>
