@@ -2,7 +2,8 @@
 name: "Guide H"
 location: "Kenmare, Co. Kerry"
 languages: ["English", "Dutch"]
-email: "guideh@example.com"
+contact:
+  email: "guideh@example.com"
 lat: 51.88
 lng: -9.583
 order: 8

@@ -4,8 +4,9 @@ location: Listowel
 languages:
   - English
   - French
-email: jphpierre@hotmail.com
-phone: +353 (0)86 199 27 60
+contact:
+  email: jphpierre@hotmail.com
+  phone: +353 (0)86 199 27 60
 photo: /1516235147675 v2.jpg
 lat: 52.446
 lng: -9.4854

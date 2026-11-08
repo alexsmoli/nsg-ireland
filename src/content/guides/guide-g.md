@@ -2,7 +2,8 @@
 name: "Guide G"
 location: "Sneem, Co. Kerry"
 languages: ["English", "Italian"]
-email: "guideg@example.com"
+contact:
+  email: "guideg@example.com"
 lat: 51.838
 lng: -9.9
 order: 7

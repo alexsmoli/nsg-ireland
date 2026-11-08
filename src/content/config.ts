@@ -29,9 +29,14 @@ const guides = defineCollection({
     name: z.string(),
     location: z.string(),
     languages: z.array(z.string()).default(["English"]),
-    email: z.string().optional(),
-    phone: z.string().optional(),
-    website: z.string().optional(),
+    contact: z
+      .object({
+        email: z.string().nullish(),
+        phone: z.string().nullish(),
+        instagram: z.string().nullish(),
+        website: z.string().nullish(),
+      })
+      .default({}),
     photo: z.string().optional(),
     lat: z.number(),
     lng: z.number(),

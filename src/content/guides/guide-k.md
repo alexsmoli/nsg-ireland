@@ -2,7 +2,8 @@
 name: "Guide K"
 location: "Glencar, Co. Kerry"
 languages: ["English", "German"]
-email: "guidek@example.com"
+contact:
+  email: "guidek@example.com"
 lat: 51.98
 lng: -9.866
 order: 11

@@ -2,7 +2,8 @@
 name: "Guide E"
 location: "Ballinskelligs, Co. Kerry"
 languages: ["English", "Irish", "Spanish"]
-email: "guidee@example.com"
+contact:
+  email: "guidee@example.com"
 lat: 51.817
 lng: -10.276
 order: 5

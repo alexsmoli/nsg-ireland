@@ -305,9 +305,15 @@ content:
       - { name: name, label: Name, type: string, required: true }
       - { name: location, label: Location, type: string, required: true }
       - { name: languages, label: Languages, type: string, list: true }
-      - { name: email, label: Email, type: string }
-      - { name: phone, label: Phone, type: string }
-      - { name: website, label: Website, type: string }
+      - name: contact
+        label: Contact
+        description: Each filled-in field shows as an icon on the guide's card. Leave empty to hide it.
+        type: object
+        fields:
+          - { name: email, label: Email, type: string, description: "e.g. name@example.com" }
+          - { name: phone, label: Phone, type: string, description: "e.g. +353 86 123 4567" }
+          - { name: instagram, label: Instagram, type: string, description: "Username (e.g. @kerrystargazer) or full profile link" }
+          - { name: website, label: Website, type: string, description: "e.g. www.example.com" }
       - { name: photo, label: Photo, type: image, options: { input: public/assets/guides, output: /assets/guides } }
       - { name: lat, label: Latitude (map pin), type: number }
       - { name: lng, label: Longitude (map pin), type: number }

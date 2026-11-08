@@ -1,6 +1,7 @@
 ---
 import { withBase } from "@utils/withBase";
 import type { CollectionEntry } from "astro:content";
+import { guideContactLinks } from "@utils/guideContacts";
 
 export interface Props {
   guide: CollectionEntry<"guides">;
@@ -10,8 +11,17 @@ export interface Props {
 }
 
 const { guide, showBio = false, compact = false } = Astro.props;
-const { name, location, languages, email, phone, website, photo } = guide.data;
+const { name, location, languages, contact, photo } = guide.data;
 const { Content } = showBio ? await guide.render() : { Content: null };
+const contactLinks = guideContactLinks(contact, name);
+
+// Stroke icons (24×24)
+const ICONS = {
+  email: ["M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z", "M3 7l9 6 9-6"],
+  phone: ["M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"],
+  instagram: ["M8 4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z", "M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z", "M16.5 7.5v.01"],
+  website: ["M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z", "M3.6 9h16.8", "M3.6 15h16.8", "M11.5 3a17 17 0 0 0 0 18", "M12.5 3a17 17 0 0 1 0 18"],
+};
 ---
 
 <article class:list={["guide-card card-glass", { compact }]} id={guide.slug}>
@@ -50,38 +60,29 @@ const { Content } = showBio ? await guide.render() : { Content: null };
         </div>
       )
     }
-    <div class="contact">
-      {
-        email && (
-          <a
-            href={`mailto:${email}`}
-            class="contact-link"
-            aria-label={`Contact ${name}`}
-          >
-            Contact
-          </a>
-        )
-      }
-      {
-        phone && (
-          <a href={`tel:${phone}`} class="contact-link ghost">
-            Call
-          </a>
-        )
-      }
-      {
-        website && (
-          <a
-            href={website}
-            class="contact-link ghost"
-            target="_blank"
-            rel="noopener"
-          >
-            Website
-          </a>
-        )
-      }
-    </div>
+    {
+      contactLinks.length > 0 && (
+        <ul class="contact" aria-label={`Contact ${name}`}>
+          {contactLinks.map(link => (
+            <li>
+              <a
+                href={link.href}
+                class="contact-icon"
+                aria-label={link.label}
+                title={link.label}
+                {...(link.external && { target: "_blank", rel: "noopener" })}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  {ICONS[link.type].map(d => (
+                    <path d={d} />
+                  ))}
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </article>
 
@@ -130,11 +131,14 @@ const { Content } = showBio ? await guide.render() : { Content: null };
   .contact {
     @apply mt-auto flex flex-wrap gap-2 pt-5;
   }
-  .contact-link {
-    @apply inline-flex min-h-[44px] items-center rounded-full bg-star px-5 text-sm font-semibold text-night-950 transition hover:bg-[#ffd98a];
+  .contact-icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/[0.04] text-white transition hover:-translate-y-0.5 hover:border-star hover:bg-star hover:text-night-950;
   }
-  .contact-link.ghost {
-    @apply border border-white/25 bg-transparent text-white hover:border-aurora hover:text-aurora;
+  .contact-icon svg {
+    @apply h-5 w-5 fill-none stroke-current;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   @media (max-width: 639px) {
